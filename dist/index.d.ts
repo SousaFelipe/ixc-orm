@@ -1,5 +1,3 @@
 import IXCClient from './IXCClient';
-declare const _default: {
-    readonly IXCClient: typeof IXCClient;
-};
-export default _default;
+import { IXCOperator, IXCOptions, IXCQuery, IXCRequest, IXCRequestMethods, IXCResponse, IXCSortOrder } from './types';
+export { IXCClient, IXCOperator, IXCOptions, IXCQuery, IXCRequest, IXCRequestMethods, IXCResponse, IXCSortOrder };

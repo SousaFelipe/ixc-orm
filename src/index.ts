@@ -3,6 +3,16 @@ import dotenv from 'dotenv';
 
 import IXCClient from './IXCClient';
 
+import {
+  IXCOperator,
+  IXCOptions,
+  IXCQuery,
+  IXCRequest,
+  IXCRequestMethods,
+  IXCResponse,
+  IXCSortOrder
+} from './types';
+
 
 
 const env = dotenv.config({
@@ -15,9 +25,13 @@ if (env.error) {
 }
 
 
-
-export default {
-
-  IXCClient
-
-} as const;
+export {
+  IXCClient,
+  IXCOperator,
+  IXCOptions,
+  IXCQuery,
+  IXCRequest,
+  IXCRequestMethods,
+  IXCResponse,
+  IXCSortOrder
+};
