@@ -22,10 +22,11 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const request_1 = require("./request");
+const types_1 = require("./types");
 class IXCClient {
     /**
      *
-     * @param table O nome da tabela dentro do banco de dados do seu servidor IXC
+     * @param table O nome da tabela correspondente ao banco de dados do seu servidor IXC
      * @see {@link https://wikiapiprovedor.ixcsoft.com.br/index.php}
      */
     constructor(table) {
@@ -43,14 +44,21 @@ class IXCClient {
      * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
      * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
      *
-     * Operadores: =, !=, >, <, >=, <=, LIKE
+     * Operadores: =, !=, >, <, >=, <=, L
      *
      * @returns
      */
     where(whereClauses) {
-        const [column, operatorOrValue, valueOrUndefined] = whereClauses;
+        if (whereClauses.length > 3) {
+            throw new Error(`O array de cláusulas não pode conter mais de 3 elementos!`);
+        }
+        const [alwaysColumn, operatorOrValue, valueOrUndefined] = whereClauses;
+        const availableOperators = Object.keys(types_1.IXCOperator);
+        if (whereClauses.length > 2 && !availableOperators.includes(operatorOrValue)) {
+            throw new Error(`O operador ${operatorOrValue}, não faz parte da lista de operadores válidos: ${availableOperators}`);
+        }
         this.params.push({
-            TB: column,
+            TB: alwaysColumn,
             OP: valueOrUndefined ? operatorOrValue : '=',
             P: valueOrUndefined ? valueOrUndefined : operatorOrValue
         });

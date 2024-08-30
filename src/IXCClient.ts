@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { createAxiosInstance, createRequestPayload } from './request';
-import { IXCOptions, IXCQuery, IXCResponse, IXCSortOrder } from './types';
+import { IXCOperator, IXCOptions, IXCQuery, IXCResponse, IXCSortOrder } from './types';
 
 
 
@@ -14,7 +14,7 @@ export default abstract class IXCClient {
 
   /**
    * 
-   * @param table O nome da tabela dentro do banco de dados do seu servidor IXC
+   * @param table O nome da tabela correspondente ao banco de dados do seu servidor IXC
    * @see {@link https://wikiapiprovedor.ixcsoft.com.br/index.php}
    */
   constructor(table: string) {
@@ -36,25 +36,39 @@ export default abstract class IXCClient {
    * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
    * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
    * 
-   * Operadores: =, !=, >, <, >=, <=, LIKE
+   * Operadores: =, !=, >, <, >=, <=, L
    * 
    * @returns 
    */
   where(whereClauses: string[]) : IXCClient {
+
+    if (whereClauses.length > 3) {
+      throw new Error(
+        `O array de cláusulas não pode conter mais de 3 elementos!`
+      );
+    }
     
     const [
-      column,
+      alwaysColumn,
       operatorOrValue,
       valueOrUndefined
     ] = whereClauses;
 
+    const availableOperators = Object.keys(IXCOperator);
+
+    if (whereClauses.length > 2 && !availableOperators.includes(operatorOrValue)) {
+      throw new Error(
+        `O operador ${ operatorOrValue }, não faz parte da lista de operadores válidos: ${ availableOperators }`
+      );
+    }
+
     this.params.push({
-      TB: column,
+      TB: alwaysColumn,
       OP: valueOrUndefined ? operatorOrValue : '=',
       P: valueOrUndefined ? valueOrUndefined : operatorOrValue
     });
 
-    return this
+    return this;
   }
 
 

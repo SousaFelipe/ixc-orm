@@ -6,7 +6,7 @@ export default abstract class IXCClient {
     protected options: IXCOptions;
     /**
      *
-     * @param table O nome da tabela dentro do banco de dados do seu servidor IXC
+     * @param table O nome da tabela correspondente ao banco de dados do seu servidor IXC
      * @see {@link https://wikiapiprovedor.ixcsoft.com.br/index.php}
      */
     constructor(table: string);
@@ -15,7 +15,7 @@ export default abstract class IXCClient {
      * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
      * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
      *
-     * Operadores: =, !=, >, <, >=, <=, LIKE
+     * Operadores: =, !=, >, <, >=, <=, L
      *
      * @returns
      */
