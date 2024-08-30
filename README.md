@@ -34,8 +34,8 @@ class Contrato extends IXCClient {
 ```typescript
 const contrato = new Contrato();
 
-contrato
-  .where('id', 240)
+const contratos = await contrato
+  .where(['id_cliente', 240])
   .where(['data_ativacao', '>=', '2024-09-24 00:45:00'])
   .orderBy('data_ativacao', 'desc')
   .get();
@@ -49,3 +49,6 @@ Para configurar a comunicação da biblioteca com seu servidor IXC, é necessár
 `IXC_HOST`
 
 `IXC_TOKEN`
+
+> **IXC_HOST** deve conter a url do seu servidor IXC, no formato: `https://seudominio.com.br/webservice/v1`
+> **IXC_TOKEN** deve conter um token de API gerado dentro do seu sistema IXCsoft.
