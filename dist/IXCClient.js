@@ -48,12 +48,12 @@ class IXCClient {
      */
     where(whereClauses) {
         if (whereClauses.length > 3) {
-            throw new Error(`> O array de cláusulas não pode conter mais de 3 elementos!`);
+            throw new Error(`> O array de cláusulas não pode conter mais de 3 elementos.`);
         }
         const [alwaysColumn, operatorOrValue, valueOrUndefined] = whereClauses;
         const availableOperators = Object.keys(types_1.IXCOperator);
         if (whereClauses.length > 2 && !availableOperators.includes(operatorOrValue)) {
-            throw new Error(`> O operador ${operatorOrValue}, não faz parte dos operadores válidos: ${availableOperators}`);
+            throw new Error(`> O operador ${operatorOrValue}, não faz parte dos operadores válidos: ${availableOperators}.`);
         }
         this.params.push({
             TB: alwaysColumn,
@@ -86,7 +86,7 @@ class IXCClient {
             const axios = (0, request_1.createAxiosInstance)('GET');
             const payload = (0, request_1.createRequestPayload)(this.table, this.params, opts);
             try {
-                const response = yield axios.get(this.table, { data: payload });
+                const response = yield axios.get(this.table, payload);
                 return response.data;
             }
             catch (error) {

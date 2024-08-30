@@ -42,7 +42,7 @@ export default abstract class IXCClient {
 
     if (whereClauses.length > 3) {
       throw new Error(
-        `> O array de cláusulas não pode conter mais de 3 elementos!`
+        `> O array de cláusulas não pode conter mais de 3 elementos.`
       );
     }
     
@@ -56,7 +56,7 @@ export default abstract class IXCClient {
 
     if (whereClauses.length > 2 && !availableOperators.includes(operatorOrValue)) {
       throw new Error(
-        `> O operador ${ operatorOrValue }, não faz parte dos operadores válidos: ${ availableOperators }`
+        `> O operador ${ operatorOrValue }, não faz parte dos operadores válidos: ${ availableOperators }.`
       );
     }
 
@@ -103,7 +103,7 @@ export default abstract class IXCClient {
     const payload = createRequestPayload(this.table, this.params, opts);
     
     try {
-      const response = await axios.get<IXCResponse>(this.table, { data: payload });
+      const response = await axios.get<IXCResponse>(this.table, payload);
       return response.data;
     }
     catch (error: any) {
