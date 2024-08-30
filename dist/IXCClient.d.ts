@@ -14,10 +14,8 @@ export default abstract class IXCClient {
      *
      * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
      * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
-     *
-     * Operadores: =, !=, >, <, >=, <=, L
-     *
-     * @returns
+     * Operadores válidos: =, !=, >, <, >=, <=, LIKE
+     * @returns A própria instância
      */
     where(whereClauses: string[]): IXCClient;
     /**
@@ -36,7 +34,7 @@ export default abstract class IXCClient {
     get(pg?: number, rows?: number): Promise<null | IXCResponse | AxiosError>;
     /**
      *
-     * @param body Um objeto no formado "chave/valor" contendo as informações do novo registro
+     * @param body Um objeto no formado "chave: valor" contendo as informações do novo registro
      * a ser inserido no banco de dados do seu servidor IXC
      * @returns Promise<null | IXCResponse | AxiosError>
      */
@@ -46,7 +44,7 @@ export default abstract class IXCClient {
     /**
      *
      * @param id O id do registro que será alterado
-     * @param body Um objeto no formado "chave/valor" contendo as colunas que serão alteradas
+     * @param body Um objeto no formado "chave : valor" contendo as colunas que serão alteradas
      * @returns Promise<null | IXCResponse | AxiosError>
      */
     put(id: number, body?: {

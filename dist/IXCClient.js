@@ -43,19 +43,17 @@ class IXCClient {
      *
      * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
      * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
-     *
-     * Operadores: =, !=, >, <, >=, <=, L
-     *
-     * @returns
+     * Operadores válidos: =, !=, >, <, >=, <=, LIKE
+     * @returns A própria instância
      */
     where(whereClauses) {
         if (whereClauses.length > 3) {
-            throw new Error(`O array de cláusulas não pode conter mais de 3 elementos!`);
+            throw new Error(`> O array de cláusulas não pode conter mais de 3 elementos!`);
         }
         const [alwaysColumn, operatorOrValue, valueOrUndefined] = whereClauses;
         const availableOperators = Object.keys(types_1.IXCOperator);
         if (whereClauses.length > 2 && !availableOperators.includes(operatorOrValue)) {
-            throw new Error(`O operador ${operatorOrValue}, não faz parte da lista de operadores válidos: ${availableOperators}`);
+            throw new Error(`> O operador ${operatorOrValue}, não faz parte dos operadores válidos: ${availableOperators}`);
         }
         this.params.push({
             TB: alwaysColumn,
@@ -111,7 +109,7 @@ class IXCClient {
     }
     /**
      *
-     * @param body Um objeto no formado "chave/valor" contendo as informações do novo registro
+     * @param body Um objeto no formado "chave: valor" contendo as informações do novo registro
      * a ser inserido no banco de dados do seu servidor IXC
      * @returns Promise<null | IXCResponse | AxiosError>
      */
@@ -137,7 +135,7 @@ class IXCClient {
     /**
      *
      * @param id O id do registro que será alterado
-     * @param body Um objeto no formado "chave/valor" contendo as colunas que serão alteradas
+     * @param body Um objeto no formado "chave : valor" contendo as colunas que serão alteradas
      * @returns Promise<null | IXCResponse | AxiosError>
      */
     put(id, body) {
