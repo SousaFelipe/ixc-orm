@@ -1,6 +1,6 @@
 {
   "name": "ixc-orm",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -28,12 +28,12 @@
     "url": "https://github.com/SousaFelipe/ixc-orm/issues"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "dotenv": "^16.4.5"
+    "axios": "^1.10.0",
+    "dotenv": "^17.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5",
-    "nodemon": "^3.1.5",
+    "@types/node": "^24.0.12",
+    "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   }

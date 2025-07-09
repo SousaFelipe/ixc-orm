@@ -4,7 +4,7 @@ import { IXCOptions, IXCQuery, IXCRequest, IXCRequestMethods } from './types';
 
 /**
  * 
- * @param method GET | POST | PUT
+ * @param method GET | POST | PUT | DELETE
  * @returns A instância de um objeto do tipo AxiosInstance, pré-configurado com os cabeçalhos necessários
  */
 export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GET') : AxiosInstance {
@@ -27,7 +27,7 @@ export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GE
 /**
  * 
  * @param table Nome da tabela do IXC onde será feita a busca, atualização, inserção ou remoção
- * @param params Parâmetros da busca (desconciderado quando a ação é a de inserir novos registros)
+ * @param params Parâmetros da busca (desconsiderados quando a ação for a de inserir novos registros)
  * @param options Parâmetros de formatação dos dados da responsta (página, ítens por página e ordenação)
  * @returns 
  */

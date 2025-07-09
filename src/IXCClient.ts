@@ -42,7 +42,7 @@ export default abstract class IXCClient {
 
     if (whereClauses.length > 3) {
       throw new Error(
-        `> O array de cláusulas não pode conter mais de 3 elementos.`
+        `> As cláusulas não podem conter mais de 3 elementos.`
       );
     }
     

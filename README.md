@@ -50,5 +50,5 @@ Para configurar a comunicação da biblioteca com seu servidor IXC, é necessár
 
 `IXC_TOKEN`
 
-> **IXC_HOST** deve conter a url do seu servidor IXC, no formato: `https://seudominio.com.br/webservice/v1`\
-> **IXC_TOKEN** deve conter um token de API gerado dentro do seu sistema IXCsoft.
+> **IXC_HOST** A url do seu servidor IXC, no formato: `https://seudominio.com.br/webservice/v1`\
+> **IXC_TOKEN** Um token de API gerado dentro do seu sistema IXCsoft.
