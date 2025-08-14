@@ -1,4 +1,4 @@
-# IXC-ORM
+# IXC-ORM [![npm](https://img.shields.io/npm/dt/ixc-orm.svg)](https://www.npmjs.com/package/ixc-orm)
 
 Este ORM simples visa facilitar o consumo de dados da API oficial do IXCsoft.\
 Esta biblioteca não faz parte das bibliotecas oficiais da IXCsoft e foi desenvolvida de forma independente e sem fins lucrativos.
