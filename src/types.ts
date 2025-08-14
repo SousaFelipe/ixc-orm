@@ -59,3 +59,9 @@ export interface IXCResponse {
   total: number,
   registros: Array<{ [key: string]: any }>
 }
+
+
+export interface IXCRecursoResponse {
+  error?: boolean | object,
+  data: any
+}

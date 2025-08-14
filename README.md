@@ -1,7 +1,17 @@
 # IXC-ORM
 
-Este ORM simples, visa facilitar o consumo de dados da API oficial do IXCsoft.\
+Este ORM simples visa facilitar o consumo de dados da API oficial do IXCsoft.\
 Esta biblioteca não faz parte das bibliotecas oficiais da IXCsoft e foi desenvolvida de forma independente e sem fins lucrativos.
+
+
+## 🚀 Novidades
+
+### v1.4.1 - 14 de agosto de 2025
+
+* **Corrigido:** Resolvido o bug de leitura das variáveis de ambiente no arquivo .env na pasta raiz.
+* **Novo:** Foram adicionados 3 dos 44 recursos da API do IXC: `get_boleto`, `liberacao_temporaria` e `desbloqueio_confianca`. (Futuramente novos recursos serão adicionados)
+
+> Consulte todos os recursos disponíveis: [Doc. API IXCSoft](https://wikiapiprovedor.ixcsoft.com.br/)
 
 
 ## Instalação

@@ -7,7 +7,10 @@ import { IXCOptions, IXCQuery, IXCRequest, IXCRequestMethods } from './types';
  * @param method GET | POST | PUT | DELETE
  * @returns A instância de um objeto do tipo AxiosInstance, pré-configurado com os cabeçalhos necessários
  */
-export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GET') : AxiosInstance {
+export function createAxiosInstance(
+  method: keyof typeof IXCRequestMethods = 'GET',
+  listar: boolean = false
+) : AxiosInstance {
 
   const host = process.env.IXC_HOST;
   const token = process.env.IXC_TOKEN;
@@ -16,7 +19,7 @@ export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GE
     method: method,
     baseURL: host ?? 'http://127.0.0.1/webservice/v1',
     headers: {
-      'ixcsoft': (method === 'GET') ? 'listar' : '',
+      'ixcsoft': listar ? 'listar' : '',
       'Content-Type': 'application/json',
       'Authorization': `Basic ${ Buffer.from(token ?? '').toString('base64') }`
     }
