@@ -6,8 +6,10 @@ Esta biblioteca não faz parte das bibliotecas oficiais da IXCsoft e foi desenvo
 
 ## 🚀 Novidades
 
-### v1.4.1 - 14 de agosto de 2025
+### v1.4.3 - 15 de agosto de 2025
+* **Melhorado:** Os métodos `get()`, `post()` e `put()` da classe `IXCClient`, a partir de agora sempre retornarão um objeto `IXCResponse`, indepedente da requisição falhar ou não.
 
+### v1.4.1 - 14 de agosto de 2025
 * **Corrigido:** Resolvido o bug de leitura das variáveis de ambiente no arquivo .env na pasta raiz.
 * **Novo:** Foram adicionados 3 dos 44 recursos da API do IXC: `get_boleto`, `liberacao_temporaria` e `desbloqueio_confianca`. (Futuramente novos recursos serão adicionados)
 
