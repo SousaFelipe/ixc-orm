@@ -1,6 +1,6 @@
-import { AxiosError } from 'axios';
 import { createAxiosInstance, createRequestPayload } from './request';
 import { IXCOperator, IXCOptions, IXCQuery, IXCResponse, IXCSortOrder } from './types';
+import { createResponse } from './response';
 
 
 
@@ -13,7 +13,6 @@ export default abstract class IXCClient {
 
 
   /**
-   * 
    * @param table O nome da tabela correspondente ao banco de dados do seu servidor IXC
    * @see {@link https://wikiapiprovedor.ixcsoft.com.br/index.php}
    */
@@ -32,10 +31,12 @@ export default abstract class IXCClient {
 
 
   /**
+   * Incrementa o array de parâmetros que serão trasformados no corpo de uma requisição
+   * e passados como filtro grid da API do IXC
    * 
-   * @param whereClauses Um array de strings, no formato [coluna, operador, valor]
-   * Obs: se você passar um array no formato [coluna, valor] o operador será considerado como '='
-   * Operadores válidos: =, !=, >, <, >=, <=, LIKE
+   * @param whereClauses Um array de strings, no formato [coluna, operador, valor]\
+   * `Obs`: se você passar um array no formato [coluna, valor] o operador será considerado como '='\
+   * Os operadores válidos são: =, !=, >, <, >=, <=, LIKE
    * @returns A própria instância
    */
   where(whereClauses: string[]) : IXCClient {
@@ -71,6 +72,7 @@ export default abstract class IXCClient {
 
 
   /**
+   * Define como a API do IXC ordenará os dados retornados
    * 
    * @param column A coluna que será usada para ordenar a busca
    * @param order A ordem da busca ('asc'ou 'desc')
@@ -84,13 +86,14 @@ export default abstract class IXCClient {
 
 
   /**
+   * Envia uma solicitação GET para a API do IXC, com o header `ixcsoft` definico como `listar`
+   * Preenche o corpo da requisição com os dados passados pela função `where` no formado JSON
    * 
-   * @param pg O número da página que será solicitada ao IXC
-   * @param rows A quantidade de linhas (registros) por página
-   * @returns Promise<null | IXCResponse | AxiosError>
+   * @param pg O número da página que será solicitada ao IXC `padão = 1`
+   * @param rows A quantidade de linhas (registros) por página `padrão = 20`
+   * @returns Promise<IXCResponse>
    */
-  async get(pg?: number, rows?: number) : Promise<null | IXCResponse | AxiosError> {
-
+  async get(pg?: number, rows?: number) : Promise<IXCResponse> {
     const { page, rowsPerPage, ...rest } = this.options;
 
     const opts = {
@@ -104,16 +107,22 @@ export default abstract class IXCClient {
     
     try {
       const response = await axios.get<IXCResponse>(this.table, payload);
-      return response.data;
+
+      if (response.status === 200) {
+        return response.data;
+      }
+
+      return createResponse({
+        error: true,
+        message: response.data?.message
+      });
     }
     catch (error: any) {
       console.error(error);
-
-      if (error instanceof AxiosError) {
-        return error;
-      }
-
-      return null;
+      return createResponse({
+        error: true,
+        message: error.response?.statusText || error.message || 'Erro desconhecido'
+      });
     }
     finally {
       this.params = [];
@@ -128,26 +137,33 @@ export default abstract class IXCClient {
 
 
   /**
+   * Envia uma requisição do tipo `POST` para a API do IXC, com o header `ixcsoft` vazio
    * 
    * @param body Um objeto no formado "chave: valor" contendo as informações do novo registro
    * a ser inserido no banco de dados do seu servidor IXC
-   * @returns Promise<null | IXCResponse | AxiosError> 
+   * @returns Promise<IXCResponse> 
    */
-  async post(body?: { [key: string]: any }) : Promise<null | IXCResponse | AxiosError> {
+  async post(body?: { [key: string]: any }) : Promise<IXCResponse> {
     const axios = createAxiosInstance('POST');
     
     try {
       const response = await axios.post<IXCResponse>(this.table, { data: body });
-      return response.data;
+      
+      if (response.status === 200) {
+        return response.data;
+      }
+
+      return createResponse({
+        error: true,
+        message: response.data?.message
+      });
     }
     catch (error: any) {
       console.error(error);
-
-      if (error instanceof AxiosError) {
-        return error;
-      }
-
-      return null;
+      return createResponse({
+        error: true,
+        message: error.response?.statusText || error.message || 'Erro desconhecido'
+      });
     }
     finally {
       this.params = [];
@@ -156,26 +172,33 @@ export default abstract class IXCClient {
 
 
   /**
+   * Envia uma requisição do tipo `PUT` para a API do IXC, com o header `ixcsoft` vazio
    * 
    * @param id O id do registro que será alterado
    * @param body Um objeto no formado "chave : valor" contendo as colunas que serão alteradas
-   * @returns Promise<null | IXCResponse | AxiosError>
+   * @returns Promise<IXCResponse>
    */
-  async put(id: number, body?: { [key: string]: any }) : Promise<null | IXCResponse | AxiosError> {
+  async put(id: number, body?: { [key: string]: any }) : Promise<IXCResponse> {
     const axios = createAxiosInstance('PUT');
 
     try {
       const response = await axios.put<IXCResponse>(`${ this.table }/${ id }`, { data: body });
-      return response.data;
+      
+      if (response.status === 200) {
+        return response.data;
+      }
+
+      return createResponse({
+        error: true,
+        message: response.data?.message
+      });
     }
     catch (error: any) {
       console.error(error);
-
-      if (error instanceof AxiosError) {
-        return error;
-      }
-
-      return null;
+      return createResponse({
+        error: true,
+        message: error.response?.statusText || error.message || 'Erro desconhecido'
+      });
     }
     finally {
       this.params = [];
