@@ -6,6 +6,9 @@ Esta biblioteca não faz parte das bibliotecas oficiais da IXCsoft e foi desenvo
 
 ## 🚀 Novidades
 
+### v1.4.4 - 15 de agosto de 2025
+* **Melhorado:** Foi adicionado um método `find()` a classe `IXCClient`, para encontrar um registro pelo seu `id` de uma forma mais simples.
+
 ### v1.4.3 - 15 de agosto de 2025
 * **Melhorado:** Os métodos `get()`, `post()` e `put()` da classe `IXCClient`, a partir de agora sempre retornarão um objeto `IXCResponse`, indepedente da requisição falhar ou não.
 

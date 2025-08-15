@@ -1,13 +1,17 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { IXCOptions, IXCQuery, IXCRequest, IXCRequestMethods } from './types';
 
 
 /**
+ * Cria uma instância de um objeto AxiosInstance, pré-configurado com os cabeçalhos necessários
+ * para executar uma requisição para a API do IXC
  * 
  * @param method GET | POST | PUT | DELETE
- * @returns A instância de um objeto do tipo AxiosInstance, pré-configurado com os cabeçalhos necessários
+ * @returns AxiosInstance
  */
-export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GET') : AxiosInstance {
+export function createAxiosInstance(
+  method: keyof typeof IXCRequestMethods = 'GET'
+): AxiosInstance {
 
   const host = process.env.IXC_HOST;
   const token = process.env.IXC_TOKEN;
@@ -25,17 +29,19 @@ export function createAxiosInstance(method: keyof typeof IXCRequestMethods = 'GE
 
 
 /**
+ * Cria um objeto `IXCRequest` configurado para ser utilizado como payload de uma requisição
+ * para a API do IXC
  * 
  * @param table Nome da tabela do IXC onde será feita a busca, atualização, inserção ou remoção
  * @param params Parâmetros da busca (desconsiderados quando a ação for a de inserir novos registros)
  * @param options Parâmetros de formatação dos dados da responsta (página, ítens por página e ordenação)
- * @returns 
+ * @returns IXCRequest
  */
 export function createRequestPayload(
   table: string,
   params: IXCQuery | IXCQuery[],
   options?: IXCOptions
-) : AxiosRequestConfig<IXCRequest> {
+): IXCRequest {
 
   const page = options?.page ?? 1;
   const rowsPerPage = options?.rowsPerPage ?? 20;
@@ -52,8 +58,8 @@ export function createRequestPayload(
         P: p.P
       });
     });
-
-    return { data: {
+    
+    return {
       qtype: table,
       query: '',
       oper: '',
@@ -62,10 +68,10 @@ export function createRequestPayload(
       sortname: `${table}.${sortName}`,
       sortorder: sortOrder,
       grid_param: JSON.stringify(grid_param)
-    }};
+    };
   }
 
-  return { data: {
+  return {
     qtype: `${table}.${params.TB}`,
     query: params.P,
     oper: params.OP || '=',
@@ -73,5 +79,5 @@ export function createRequestPayload(
     rp: rowsPerPage,
     sortname: `${table}.${sortName}`,
     sortorder: sortOrder
-  }};
+  };
 }

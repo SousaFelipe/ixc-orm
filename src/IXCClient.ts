@@ -86,7 +86,62 @@ export default abstract class IXCClient {
 
 
   /**
-   * Envia uma solicitação GET para a API do IXC, com o header `ixcsoft` definico como `listar`
+   * Envia uma requisição GET para a API do IXC, com o header `ixcsoft` definico como `listar`\
+   * A `query` dessa requisição não será enviada para o IXC com o parâmetro `grid_param`\
+   * Ou seja, esta requisição executa uma busca simples, em vez do filtro de grid
+   * 
+   * @param id O identificador numérico do registro que será buscado no IXC
+   * @returns Promise<IXCResponse> 
+   */
+  async find(id: any) {
+
+    const params = {
+      TB: 'id',
+      OP: '=',
+      P: id
+    };
+
+    const opts = {
+      page: 1,
+      rowsPerPage: 1,
+    };
+
+    const axios = createAxiosInstance('GET');
+    const data = createRequestPayload(this.table, params, opts);
+    
+    try {
+      const response = await axios.get<IXCResponse>(this.table, { data });
+
+      if (response.status === 200) {
+        return response.data;
+      }
+
+      return createResponse({
+        error: true,
+        message: response.data?.message
+      });
+    }
+    catch (error: any) {
+      console.error(error);
+      return createResponse({
+        error: true,
+        message: error.response?.statusText || error.message || 'Erro desconhecido'
+      });
+    }
+    finally {
+      this.params = [];
+      this.options = {
+        page: 1,
+        rowsPerPage: 20,
+        sortName: 'id',
+        sortOrder: 'asc'
+      };
+    }
+  }
+
+
+  /**
+   * Envia uma requisição GET para a API do IXC, com o header `ixcsoft` definico como `listar`
    * Preenche o corpo da requisição com os dados passados pela função `where` no formado JSON
    * 
    * @param pg O número da página que será solicitada ao IXC `padão = 1`
@@ -103,10 +158,10 @@ export default abstract class IXCClient {
     };
 
     const axios = createAxiosInstance('GET');
-    const payload = createRequestPayload(this.table, this.params, opts);
+    const data = createRequestPayload(this.table, this.params, opts);
     
     try {
-      const response = await axios.get<IXCResponse>(this.table, payload);
+      const response = await axios.get<IXCResponse>(this.table, { data });
 
       if (response.status === 200) {
         return response.data;

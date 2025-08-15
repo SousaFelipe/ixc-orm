@@ -53,7 +53,7 @@ export interface IXCRequest {
 
 export interface IXCResponse {
   error?: boolean | object,
-  message?: string | null,
+  message?: string,
   id?: string | number,
   page: number | string,
   total: number,
