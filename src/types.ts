@@ -1,6 +1,5 @@
 
 
-
 export const IXCOperator = {
   '=':    '=',
   '>':    '>',
@@ -9,19 +8,19 @@ export const IXCOperator = {
   '<=':   '<=',
   '!=':   '!=',
   'LIKE': 'L'
-}
+};
 
 export const IXCSortOrder = {
   asc: 'asc',
   desc: 'desc'
-}
+};
 
 export const IXCRequestMethods = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
   DELETE: 'DELETE'
-}
+};
 
 
 export interface IXCOptions {
@@ -29,14 +28,14 @@ export interface IXCOptions {
   rowsPerPage?: number,
   sortName?: string,
   sortOrder?: keyof typeof IXCSortOrder
-}
+};
 
 
 export interface IXCQuery {
   TB: string,
   OP?: string,
   P: string
-}
+};
 
 
 export interface IXCRequest {
@@ -48,7 +47,7 @@ export interface IXCRequest {
   sortname: string,
   sortorder: string,
   grid_param?: string
-}
+};
 
 
 export interface IXCResponse {
@@ -58,10 +57,11 @@ export interface IXCResponse {
   page: number | string,
   total: number,
   registros: Array<{ [key: string]: any }>
-}
+};
 
 
 export interface IXCRecursoResponse {
+  data: any,
   error?: boolean | object,
-  data: any
-}
+  message?: string
+};

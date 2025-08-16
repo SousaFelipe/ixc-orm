@@ -1,7 +1,7 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import IXCClient from './IXCClient';
-import recursos from './recursos';
+import RecursoIXC from './recursos';
 
 import {
   IXCOperator,
@@ -16,8 +16,8 @@ import {
 
 
 const root = (__dirname.includes('\\node_modules\\'))
-  ? path.join(__dirname, `../../../.env`)
-  : path.join(__dirname, `../../.env`);
+  ? path.join(__dirname, '../../../.env')
+  : path.join(__dirname, '../../.env');
 
 const env = dotenv.config({ path: root });
 
@@ -36,5 +36,5 @@ export {
   IXCRequestMethods,
   IXCResponse,
   IXCSortOrder,
-  recursos
+  RecursoIXC
 };

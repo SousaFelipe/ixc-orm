@@ -7,13 +7,16 @@ const src = 'desbloqueio_confianca';
 
 
 
-async function execute(id_contrato: string | number): Promise<IXCResponse> {
+export default async function desbloqueio_confianca(
+  args: { id_contrato?: string | number }
+): Promise<IXCResponse> {
+  
+  const { id_contrato } = args;
+
   return await recurso({
     src,
-    data: { id_contrato }
+    data: {
+      id_contrato
+    }
   });
 }
-
-
-
-export default { execute } as const;

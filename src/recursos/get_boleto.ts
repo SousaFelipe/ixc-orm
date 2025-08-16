@@ -8,10 +8,15 @@ const SRC = 'get_boleto';
 
 
 
-async function execute(id_fatura: string | number): Promise<IXCResponse | IXCRecursoResponse> {
+export default async function get_boleto(
+  args: { id_fatura?: string | number }
+): Promise<IXCResponse | IXCRecursoResponse> {
+
   const axios = createAxiosInstance('PUT');
 
   try {
+    const { id_fatura } = args;
+
     const response = await axios.get(SRC, {
       data: {
         boletos: id_fatura,
@@ -35,7 +40,3 @@ async function execute(id_fatura: string | number): Promise<IXCResponse | IXCRec
 
   return createResponse({ error: true });
 }
-
-
-
-export default { execute } as const;
