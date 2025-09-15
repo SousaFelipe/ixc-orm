@@ -20,17 +20,20 @@ export default async function recurso({
     const response = await axios.get(src, { data });
 
     if (response.status === 200) {
+
       const { data } = response;
+      const { message, mensagem, ...rest } = data;
       
-      if (data?.type === 'success' || data?.tipo === 'sucesso') {
+      if (rest.type === 'success' || rest.tipo === 'sucesso') {
         return createResponse({
-          message: data.message || data.mensagem,
+          ...rest,
+          message: message || mensagem,
         });
       }
 
       return createResponse({
         error: true,
-        message: data.message || data.mensagem
+        message: message || mensagem
       });
     }
   }
