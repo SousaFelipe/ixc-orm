@@ -1,7 +1,7 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import IXCClient from './IXCClient';
-import RecursoIXC from './recursos';
+import RecursoIXC, { Recurso } from './recursos';
 
 import {
   IXCOperator,
@@ -36,5 +36,10 @@ export {
   IXCRequestMethods,
   IXCResponse,
   IXCSortOrder,
-  RecursoIXC
+  Recurso,
+  /**
+   * @property RecursoIXC
+   * @deprecated Acesse os recursos através da constante {@link Recurso}
+   */
+  RecursoIXC,
 };

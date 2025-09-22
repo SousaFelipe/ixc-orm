@@ -62,11 +62,11 @@ Você não precisará se preocupar em criar uma classe `Boleto` que herde da cla
 nem encadear chamadas `where`. Basta seguir o exemplo abaixo:
 
 ```typescript
-import { RecursoIXC } from 'ixc-orm';
+import { Recurso } from 'ixc-orm';
 
-const id_fatura = 45852;
+const id_contrato = 45852;
 
-const response = await RecursoIXC('get_boleto', { id_fatura })
+const response = await Recurso.desbloqueioDeConfianca(id_contrato);
 ```
 
 > Dos recursos disponibilizados pela API do **IXC Provedor**, esta biblioteca já implementou os seguintes recursos:\
