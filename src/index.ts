@@ -12,7 +12,7 @@ import {
   IXCResponse,
   IXCSortOrder
 } from './types';
-
+import Environment from './config/environment';
 
 
 const root = (__dirname.includes('\\node_modules\\'))
@@ -24,6 +24,10 @@ const env = dotenv.config({ path: root });
 if (env.error) {
   console.error(env.error);
   process.exit(-1);
+}
+else {
+  Environment.getInstance().setHost(process.env.IXC_HOST);
+  Environment.getInstance().setToken(process.env.IXC_TOKEN);
 }
 
 
