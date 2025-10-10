@@ -139,7 +139,7 @@ export default abstract class IxcOrm extends RequestEmitter {
    * @param column A coluna que será utilizada para ordenar os registros.
    * @returns A própria instância.
    */
-  orderBy(sort: Sort, column: string) {
+  orderBy(column: string, sort: Sort) {
     this.ordering = (sort === Sort.ASC)
         ? Ordering.ascBy(super.getTable(), column)
         : Ordering.descBy(super.getTable(), column);
