@@ -148,7 +148,7 @@ IXC_TOKEN="8:k4n8wk1946j7mimthei869cq1zz2u940f2gqobqg081y2oefl80mzhtq2wud3gqp"
 
 Contribuições são sempre bem-vindas!\
 Se você conhece uma maneira melhor de fazer algo, por favor, me avise!
-Caso contrário, é sempre melhor fazer um PR na branch master.
+Caso contrário, é sempre melhor fazer um PR na branch main.
 
 At.te,\
 <b>Felipe S. Carmo</b>.
