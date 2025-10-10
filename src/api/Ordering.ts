@@ -1,4 +1,5 @@
-import Utils from "./Utils";
+import Utils from './Utils';
+
 
 export enum Sort {
   ASC = 'asc',
