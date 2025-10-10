@@ -1,4 +1,4 @@
-import utils from "./Utils";
+import Utils from "./Utils";
 
 export enum Sort {
   ASC = 'asc',
@@ -9,14 +9,14 @@ export enum Sort {
 export default class Ordering {
 
   public static ascBy(table: string, column: string) : Ordering {
-    const normalizedTable = utils.Text.normalize(table);
-    const normalizedColumn = utils.Text.normalize(column);
+    const normalizedTable = Utils.Text.normalize(table);
+    const normalizedColumn = Utils.Text.normalize(column);
     return new Ordering(`${normalizedTable}.${normalizedColumn}`, Sort.ASC);
   }
 
   public static descBy(table: string, column: string) : Ordering {
-    const normalizedTable = utils.Text.normalize(table);
-    const normalizedColumn = utils.Text.normalize(column);
+    const normalizedTable = Utils.Text.normalize(table);
+    const normalizedColumn = Utils.Text.normalize(column);
     return new Ordering(`${normalizedTable}.${normalizedColumn}`, Sort.DESC);
   }
 

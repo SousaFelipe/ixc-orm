@@ -1,14 +1,5 @@
-import utils from './Utils';
-
-
-export enum Operador {
-  EQUALS = '=',
-  LIKE = 'L',
-  LESS_THAN = '<',
-  LESS_THAN_EQUALS = '<=',
-  GREATER_THAN = '>',
-  GREATER_THAN_EQUALS = '>='
-};
+import Operators from './Operators';
+import Utils from './Utils';
 
 
 export type ParameterObject = {
@@ -28,22 +19,22 @@ export default class Parameter {
 
 
   constructor(table: string) {
-    this.table = utils.Text.normalize(table);
-    this.operator = Operador.EQUALS;
+    this.table = Utils.Text.normalize(table);
+    this.operator = Operators.EQUALS;
     this.type = this.table;
     this.value = '';
   }
 
 
   withType(type: string) {
-    const normalizedType = utils.Text.normalize(type);
+    const normalizedType = Utils.Text.normalize(type);
     this.type = `${this.table}.${normalizedType}`;
     return this;
   }
 
 
-  withOperator(operador: Operador) {
-    this.operator = !(!operador) ? operador : Operador.EQUALS;
+  withOperator(operator: Operators) {
+    this.operator = !(!operator) ? operator : Operators.EQUALS;
     return this;
   }
 

@@ -60,6 +60,8 @@ export const Recurso = {
 
 
 /**
+ * *ATENÇÃO:* Esta função desá descontinuada
+ * 
  * @deprecated Acesse os recursos através da constante {@link Recurso}
  */
 export default async function RecursoIXC<T extends keyof Recursos>(

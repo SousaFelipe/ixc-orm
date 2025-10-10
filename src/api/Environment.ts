@@ -4,7 +4,7 @@ export default class Environment {
   private static instance: Environment;
 
 
-  declare private host: string;
+  declare private domain: string;
   declare private token: string;
 
 
@@ -19,8 +19,8 @@ export default class Environment {
   private constructor() {}
 
 
-  getHost() {
-    return this.host;
+  getDomain() {
+    return this.domain;
   }
 
 
@@ -29,11 +29,11 @@ export default class Environment {
   }
 
 
-  setHost(host?: string) {
-    const newHostIsValid = !(!host?.length);
-    const oldHostIsValid = !this.host?.length;
-    if (newHostIsValid && oldHostIsValid) {
-      this.host = host;
+  setDomain(domain?: string) {
+    const newDomainIsValid = !(!domain?.length);
+    const oldDomainIsValid = !this.domain?.length;
+    if (newDomainIsValid && oldDomainIsValid) {
+      this.domain = domain;
     }
   }
 

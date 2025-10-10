@@ -2,16 +2,16 @@
 
 class TextUtils {
   static normalize(text: string): string {
-    return text.replace(/[^a-z0-9]/gi, '').trim();
+    return text.replace(/[^a-z0-9_]/gi, '').trim();
   }
 }
 
 
-const utils = {
+const Utils = {
 
   Text: TextUtils
 
-}
+};
 
 
-export default utils;
+export default Utils;

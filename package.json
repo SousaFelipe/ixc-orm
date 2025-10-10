@@ -1,6 +1,6 @@
 {
   "name": "ixc-orm",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -8,7 +8,8 @@
   "scripts": {
     "declare": "tsc --declaration",
     "build": "tsc --build",
-    "dev": "nodemon --watch \"src//\" --exec \"ts-node src/index.ts\" -e ts"
+    "dev": "nodemon --watch \"src//\" --exec \"ts-node src/index.ts\" -e ts",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,12 @@
   "keywords": [
     "IXCSoft API",
     "IXCsoft",
-    "IXC API"
+    "IXC API",
+    "IXC Provedor"
   ],
   "author": {
     "name": "Felipe Sousa",
-    "email": "flpssdocarmo@gmail.com",
+    "email": "fscarmo@proton.me",
     "url": "https://github.com/SousaFelipe"
   },
   "bugs": {
@@ -29,11 +31,17 @@
   },
   "dependencies": {
     "axios": "^1.12.2",
-    "dotenv": "^17.2.2"
+    "dotenv": "^17.2.2",
+    "jsdom": "^27.0.0"
   },
   "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@types/jest": "^30.0.0",
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^24.5.2",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.10",
+    "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
