@@ -1,4 +1,4 @@
-import utils from './utils';
+import utils from './Utils';
 
 
 export enum Operador {
@@ -8,6 +8,13 @@ export enum Operador {
   LESS_THAN_EQUALS = '<=',
   GREATER_THAN = '>',
   GREATER_THAN_EQUALS = '>='
+};
+
+
+export type ParameterObject = {
+  TB: string,
+  OP: string,
+  P: string | number
 };
 
 
@@ -49,7 +56,7 @@ export default class Parameter {
   }
 
 
-  toJsonObject() {
+  toJsonObject() : ParameterObject {
     return {
       TB: this.type,
       OP: this.operator,
