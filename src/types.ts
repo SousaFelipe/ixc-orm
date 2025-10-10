@@ -52,6 +52,7 @@ export interface IXCRequest {
 
 export interface IXCResponse {
   error?: boolean | object,
+  type?: string,
   message?: string,
   id?: string | number,
   page: number | string,
