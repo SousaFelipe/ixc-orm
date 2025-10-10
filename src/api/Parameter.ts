@@ -2,7 +2,7 @@ import Operators from './Operators';
 import Utils from './Utils';
 
 
-export type ParameterObject = {
+export type ParameterProps = {
   TB: string,
   OP: string,
   P: string | number
@@ -47,7 +47,7 @@ export default class Parameter {
   }
 
 
-  toJsonObject() : ParameterObject {
+  toJsonObject() : ParameterProps {
     return {
       TB: this.type,
       OP: this.operator,

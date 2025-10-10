@@ -1,7 +1,7 @@
 import Operators from './api/Operators';
 import Ordering, { Sort } from './api/Ordering';
 import Pagination from './api/Pagination';
-import Parameter, { ParameterObject } from './api/Parameter';
+import Parameter, { ParameterProps } from './api/Parameter';
 import RequestEmitter from './api/RequestEmitter';
 
 
@@ -9,7 +9,7 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   declare private ordering: Ordering;
   declare private pagination: Pagination;
-  declare private parameters: Array<ParameterObject>;
+  declare private parameters: Array<ParameterProps>;
   declare private parameterStub: Parameter;
 
   /**
