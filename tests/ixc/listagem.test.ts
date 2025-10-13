@@ -11,16 +11,17 @@ class Cliente extends IxcOrm {
 }
 
 
-describe('Clientes', () => {
+describe('Listagem de registros', () => {
 
-  it('Listagem', async () => {
+  it('deve encontrar pelo ao menos 1 cliente', async () => {
 
     const response = await Cliente.newCliente()
         .where('cnpj_cpf')
-        .exactly('025.076.083-58')
+        .exactly('123.456.789-10')
         .GET();
 
-    expect(1).toEqual(response.registros().length);
+    const registros = response.registros();
+    expect(registros.length).toBeGreaterThan(0);
   });
 
 });

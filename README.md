@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/dt/ixc-orm.svg?style=for-the-badge)](https://www.npmjs.com/package/ixc-orm)
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen?style=for-the-badge)
 ![NPM Version](https://img.shields.io/npm/v/ixc-orm?style=for-the-badge)
-  
+
 Esse ORM visa facilitar o consumo de dados da API oficial do [IXC Provedor](https://ixcsoft.com/ixc-provedor).\
 Essa biblioteca não faz parte das bibliotecas oficiais da [IXCsoft](https://ixcsoft.com/) e foi desenvolvida de forma independente e sem fins lucrativos.
 
@@ -26,7 +26,7 @@ yarn add ixc-orm
 
 ## Como utilizar
 
-As classes que representarão as tabelas dentro do banco de dados do seu servidor IXC, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
+As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
 > Versão 1.7.0 `stable`
@@ -101,7 +101,7 @@ const contratos = await contrato.find(id_contrato)
 ## Recursos da API do IXC Provedor
 
 Existem alguns `endpoints` que a API do IXC disponibiliza, a fim de "encurtar o caminho" para chegar até algumas informações. Como por exemplo, obter o arquivo PDF de uma fatura.\
-Você não precisará se preocupar em criar uma classe `Boleto` que herde da classe `IXCClient`, por exemplo,\
+Você não precisará se preocupar em criar uma classe `Boleto` que herde da classe `IxcOrm`, por exemplo,\
 nem encadear chamadas `where`. Basta seguir o exemplo abaixo:
 
 ```typescript
@@ -112,9 +112,9 @@ const id_contrato = 45852;
 const response = await Recurso.desbloqueioDeConfianca(id_contrato);
 ```
 
-> Dos recursos disponibilizados pela API do **IXC Provedor**, esta biblioteca já implementou os seguintes recursos:\
+> Dos recursos disponibilizados pela API do **IXC Provedor**, essa biblioteca já implementou os seguintes recursos:\
 > `get_boleto`, `desbloqueio_confianca` e `cliente_contrato_btn_lib_temp_24722`.\
-> Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo de sua documentação oficial.
+> Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo através da sua documentação oficial.
 
 
 ## Variáveis de Ambiente
