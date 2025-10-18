@@ -33,7 +33,7 @@ yarn add ixc-orm
 Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é necessário adicionar as seguintes variáveis de ambiente a um arquivo `.env`, que esteja localizado no diretório raiz do seu projeto.
 
 > [!NOTE]\
-> Versão 1.7.1 `stable`
+> Versão 1.8.0 `stable`
 
 - **IXC_ACCESS_TOKEN** Um token de API gerado dentro do IXC Provedor.
 - **IXC_SERVER_DOMAIN** O domínio do seu servidor IXC Provedor.
@@ -41,6 +41,19 @@ Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é 
 ```ini
 IXC_ACCESS_TOKEN=conteúdo-do-token-gerado-dentro-do-ixc
 IXC_SERVER_DOMAIN=www.dominio-do-seu-servidor-ixc.com.br
+```
+
+Você também poderá configurar para que o Docker carregue as variáveis, ao invés de carregá-las diretamente do arquivo `.env`, dessa forma:
+
+```yaml
+services:
+  sua-aplicacao:
+    build: .
+    image: sua-imagem-docker
+    environment:
+      - IXC_ACCESS_TOKEN=${IXC_ACCESS_TOKEN}
+      - IXC_SERVER_DOMAIN=${IXC_SERVER_DOMAIN}
+    # Outras configurações do seu serviço
 ```
 
 
@@ -57,7 +70,7 @@ IXC_TOKEN="8:k4n8wk1946j7mimthei869cq1zz2u940f2gqobqg081y2oefl80mzhtq2wud3gqp"
 As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
-> Versão 1.7.1 `stable`
+> Versão 1.8.0 `stable`
 
 ```typescript
 import { IxcOrm } from 'ixc-orm';
@@ -84,7 +97,7 @@ class Contrato extends IXCClient {
 Após instanciar um objeto com o tipo que você criou (`Contrato, como no exemplo a cima`), você poderá acessar os métodos de construção da query de busca.
 
 > [!NOTE]\
-> Versão 1.7.1 `stable`
+> Versão 1.8.0 `stable`
 
 ```typescript
 import { IxcResponse, Sort } from 'ixc-orm';

@@ -1,5 +1,3 @@
-import path from 'path';
-import dotenv from 'dotenv';
 import IXCClient from './IXCClient';
 import RecursoIXC, { Recurso } from './recursos';
 
@@ -8,6 +6,7 @@ import IxcOrm from './IxcOrm';
 import IxcResponse from './IxcResponse';
 import Operators from './api/Operators';
 import Ordering from './api/Ordering';
+import Utils from './utils';
 
 import {
   IXCOperator,
@@ -20,22 +19,7 @@ import {
 } from './types';
 
 
-const root = (__dirname.includes('\\node_modules\\'))
-    ? path.join(__dirname, '../../../.env')
-    : path.join(__dirname, '../.env');
-
-const env = dotenv.config({
-  quiet: true,
-  path: path.resolve(root)
-});
-
-if (env.error) {
-  console.error(env.error);
-  process.exit(1);
-}
-
-Environment.getInstance().setToken(process.env.IXC_ACCESS_TOKEN);
-Environment.getInstance().setDomain(process.env.IXC_SERVER_DOMAIN);
+Environment.getInstance();
 
 
 export {
@@ -55,6 +39,7 @@ export {
   IxcResponse,
   Operators,
   Ordering,
+  Utils,
 
   /**
    * @property RecursoIXC

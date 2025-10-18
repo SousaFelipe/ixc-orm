@@ -1,5 +1,5 @@
 import Operators from './Operators';
-import Utils from './Utils';
+import Utils from '../utils';
 
 
 export type ParameterProps = {

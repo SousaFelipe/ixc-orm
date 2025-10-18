@@ -1,6 +1,6 @@
 import Environment from './Environment';
 import IxcResponse from '../IxcResponse';
-import Utils from './Utils';
+import Utils from '../utils';
 
 
 export default class RequestEmitter {

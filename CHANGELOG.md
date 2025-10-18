@@ -1,4 +1,5 @@
 # 🔄 CHANGELOG
+- [v1.8.0 - 18 de outubro de 2025](#v180)
 - [v1.7.1 - 18 de outubro de 2025](#v171)
 - [v1.7.0 - 10 de outubro de 2025](#v170)
 - [v1.6.0 - 16 de agosto de 2025](#v150)
@@ -8,6 +9,10 @@
 - [v1.4.1 - 14 de agosto de 2025](#v141)
 
 ## 🚀 Novidades
+
+### v1.8.0
+* **Melhoria:** O processo de carregamento do ambiente consegue detectar se as variáveis já foram carregas por um container Docker e interrompe o carregamento através do `.env`, evitando que a aplicação encerre o processo com erro..
+* **Correção:** Corrigida incompatibilidade com o cache do `pnpm`. Ao tentar carregar as variáveis diretamente do arquivo `.env`, o ambiente buscará o arquivo de forma recursiva, para conseguir encontrá-lo mesmo quando a biblioteca interpretar a pasta `node_modules` como root. (ocorre em alguns cenários muito específicos, apenas com o `pnpm`), evitando que o processo seja encerrado com erro.
 
 ### v1.7.1
 * **Melhoria:** Adicionado o método `fail()` à classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>, para verificar se o IXC Provedor retornou uma resposta com erro.

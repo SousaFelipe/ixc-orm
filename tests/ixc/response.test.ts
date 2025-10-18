@@ -16,7 +16,7 @@ describe('IxcResponse', () => {
   it('deve retornar uma mensagem e erro', async () => {
     const response = await Cliente.newCliente()
         .where('campo_inexistente')
-        .exactly('chubiraum daum daum')
+        .exactly('tchu biraum daum daum')
         .GET();
     expect(response.fail()).toBeTruthy();
     expect(response.message().length).toBeGreaterThan(0);

@@ -14,7 +14,7 @@ const config: Config = {
   },
 
   collectCoverageFrom: [
-    "**/*.(t|j)s"
+    "**/src/**/*.(t|j)s"
   ],
 
   setupFiles: [
