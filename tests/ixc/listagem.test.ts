@@ -17,7 +17,7 @@ describe('Listagem de registros', () => {
 
     const response = await Cliente.newCliente()
         .where('cnpj_cpf')
-        .exactly('123.456.789-10')
+        .exactly('123.456.789-10') // Inserir CPF de um cliente cadastrado no IXC Provedor.
         .GET();
 
     const registros = response.registros();

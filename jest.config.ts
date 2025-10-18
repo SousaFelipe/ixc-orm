@@ -7,13 +7,14 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
+  testEnvironment: "node",
 
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
 
-  coverageReporters: [
-    'json'
+  collectCoverageFrom: [
+    "**/*.(t|j)s"
   ],
 
   setupFiles: [
