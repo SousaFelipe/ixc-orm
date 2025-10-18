@@ -160,7 +160,7 @@ export default class RequestEmitter {
       return await response.text();
     }
     catch (error: any) {
-      return IxcResponse.createPropsWithError(error);
+      return IxcResponse.createResponseTextWithError(error);
     }
   }
 

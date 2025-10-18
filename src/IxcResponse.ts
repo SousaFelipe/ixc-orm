@@ -12,7 +12,7 @@ export default class IxcResponse {
    * @param error Uma exceção capturada por um bloco try-catch.
    * @returns Um objeto de resposta do IXC Provedor.
    */
-  public static createPropsWithError(error: any) {
+  public static createResponseTextWithError(error: any) {
     const response = {
       type: 'error',
       page: 0,
