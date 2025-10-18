@@ -1,4 +1,5 @@
 # 🔄 CHANGELOG
+- [v1.7.1 - 18 de outubro de 2025](#v171)
 - [v1.7.0 - 10 de outubro de 2025](#v170)
 - [v1.6.0 - 16 de agosto de 2025](#v150)
 - [v1.5.0 - 16 de agosto de 2025](#v150)
@@ -7,6 +8,9 @@
 - [v1.4.1 - 14 de agosto de 2025](#v141)
 
 ## 🚀 Novidades
+
+### v1.7.1
+* **Melhoria:** Adicionado o método `fail()` à classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>, para verificar se o IXC Provedor retornou uma resposta com erro.
 
 ### v1.7.0
 * **Atualização:** Novas classes adiconadas, para simplificar a manipulação dos filtros de busca e das respostas da API do **IXC Provedor**.

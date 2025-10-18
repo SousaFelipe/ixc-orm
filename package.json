@@ -1,6 +1,6 @@
 {
   "name": "ixc-orm",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -9,7 +9,8 @@
     "declare": "tsc --declaration",
     "build": "tsc --build",
     "dev": "nodemon --watch \"src//\" --exec \"ts-node src/index.ts\" -e ts",
-    "test": "jest"
+    "test": "jest",
+    "test:cov": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
     "IXC Provedor"
   ],
   "author": {
-    "name": "Felipe Sousa",
+    "name": "Felipe S. Carmo",
     "email": "fscarmo@proton.me",
     "url": "https://github.com/SousaFelipe"
   },

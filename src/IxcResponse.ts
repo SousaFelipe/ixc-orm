@@ -4,6 +4,7 @@ import { JSDOM } from 'jsdom';
 export default class IxcResponse {
 
   declare private data: {[key: string]: any};
+  declare private text: string;
   
   /**
    * Cria um novo objeto no formato de uma resposta padrão do IXC Provedor.
@@ -28,7 +29,26 @@ export default class IxcResponse {
    * @param text O conteúdo da resposta do IXc Provedor, no formato de texto.
    */
   constructor(text: string) {
-    this.data = this.parseDataFromText(text);
+    this.text = text;
+    this.data = this.createDataFromText();
+  }
+
+  /**
+   * Verifica se o IXC Provedor retornou uma mensagem de erro.
+   * 
+   * @returns **true** se o corpo da mensagem estiver dentro de tags HTML e se a mensagem dentro das tags
+   * contiver a palavra "erro". Ou se o objeto da resposta possuir a propriedade { "type": "error", ... }.
+   */
+  fail() : boolean {
+    const hasHtml = this.responseTextHasHtml();
+    const hasError = this.message().includes('erro');
+    if (hasHtml && hasError) {
+      return true;
+    }
+    if (this.data && Object.keys(this.data).includes('type')) {
+      return this.data.type === 'error';
+    }
+    return false;
   }
 
   /**
@@ -79,16 +99,19 @@ export default class IxcResponse {
     return this.data.registros;
   }
 
-  private parseDataFromText(text: string) : {[key: string]: any} {
-    const isValidHTML = text?.length && text.includes('<div style=');
-    if (isValidHTML) {
-      return this.parseDataFromHTML(text);
-    }
-    return JSON.parse(text);
+  private responseTextHasHtml() : boolean {
+    return !(!this.text?.length) && this.text.startsWith('<div style=');
   }
 
-  private parseDataFromHTML(html: string) : {[key: string]: any} {
-    const dom = new JSDOM(html);
+  private createDataFromText() : {[key: string]: any} {
+    if (this.responseTextHasHtml()) {
+      return this.createDataFromHtml();
+    }
+    return JSON.parse(this.text);
+  }
+
+  private createDataFromHtml() : {[key: string]: any} {
+    const dom = new JSDOM(this.text);
     return {
       type: 'error',
       page: 0,
