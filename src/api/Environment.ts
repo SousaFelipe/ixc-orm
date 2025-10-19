@@ -27,31 +27,32 @@ export default class Environment {
 
 
   private shouldToLoadDotEnvFile() : void {
-
-    if (this.loadedEnvVars()) {
+    if (this.envHasBeenLoaded()) {
       return;
     }
-
-    const fileUtil = new Utils.File();
-    const envfile = fileUtil.findFile('.env');
-
-    const env = dotenv.config({
-      quiet: true,
-      path: path.resolve(envfile)
-    });
-
-    if (env.error) {
-      console.error(env.error);
-      process.exit(1);
-    }
+    this.loadEnvFromEnvFile();
   }
 
 
-  private loadedEnvVars() : boolean {
+  private envHasBeenLoaded() : boolean {
     const allEnvVars = Object.keys(process.env);
     return allEnvVars.some(envVar => {
       return envVar.startsWith('IXC_');
     });
+  }
+
+
+  private loadEnvFromEnvFile() : void {
+    const fileUtil = new Utils.File();
+    const envfile = fileUtil.findFile('.env');
+    const env = dotenv.config({
+      quiet: true,
+      path: path.resolve(envfile)
+    });
+    if (env.error) {
+      console.error(env.error);
+      process.exit(1);
+    }
   }
 
 
