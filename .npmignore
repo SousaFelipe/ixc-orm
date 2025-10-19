@@ -5,3 +5,5 @@ src/
 tests/
 
 .env
+babel.config.cjs
+jest.config.ts
