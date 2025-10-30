@@ -1,24 +1,25 @@
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 
 const config: Config = {
+  preset: 'ts-jest',
 
   clearMocks: true,
-  collectCoverage: true,
+  collectCoverage: false,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
-  testEnvironment: "node",
+  testEnvironment: 'node',
 
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
 
   collectCoverageFrom: [
-    "**/src/**/*.(t|j)s"
+    '**/src/**/*.(t|j)s'
   ],
 
   setupFiles: [
-    "dotenv/config"
+    'dotenv/config'
   ],
 
   setupFilesAfterEnv: [

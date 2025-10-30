@@ -19,7 +19,7 @@ import {
 } from './types';
 
 
-Environment.getInstance();
+Environment.loadInstance();
 
 
 export {

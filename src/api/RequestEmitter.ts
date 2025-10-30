@@ -15,7 +15,7 @@ export default class RequestEmitter {
    * 
    * @param table Representa o endpoint do IXC Provedor para o qual será enviada a requisição.
    */
-  protected constructor(table: string) {
+  constructor(table: string) {
     this.table = Utils.Text.normalize(table);
     this.headers = [];
     this.query = '';
@@ -82,15 +82,6 @@ export default class RequestEmitter {
   }
 
   /**
-   * Obtém o valor da tabela, definida no cosntrutor.
-   * 
-   * @returns string
-   */
-  protected getTable() : string {
-    return this.table;
-  }
-
-  /**
    * Define a query que será enviada no corpo de uma requisição de busca.
    * 
    * @example
@@ -113,8 +104,34 @@ export default class RequestEmitter {
    * 
    * @param query Um objeto no formato de uma query da API do IXC Provedor.
    */
-  protected setupQuery(query: {[key: string]: any}) : void {
+  setupQuery(query: {[key: string]: any}) : void {
     this.query = query as BodyInit;
+  }
+
+  /**
+   * Envia requisições para recursos específicos do IXC Provedor.
+   * 
+   * @returns Uma nova instância de IxcResponse, contendo os dados retornados pelo recurso do IXC Provedor.
+   */
+  async sendRequestToResource() {
+    try {
+      this.setupUri();
+      const responseText = await this.sendRequest('POST', this.query);
+      return new IxcResponse(responseText);
+    }
+    catch (error: any) {
+      const responseTextError = IxcResponse.createResponseTextWithError(error);
+      return new IxcResponse(responseTextError);
+    }
+  }
+
+  /**
+   * Obtém o valor da tabela, definida no cosntrutor.
+   * 
+   * @returns string
+   */
+  protected getTable() : string {
+    return this.table;
   }
 
   private loadCommonHeaders() : void {
@@ -125,12 +142,12 @@ export default class RequestEmitter {
   }
 
   private getEncodedTokenFromContext() : string {
-    const token = Environment.getInstance().getToken();
+    const token = Environment.loadInstance().getToken();
     return Buffer.from(token ?? '').toString('base64')
   }
 
   private setupUri(id?: number) : void {
-    const host = Environment.getInstance().getDomain();
+    const host = Environment.loadInstance().getDomain();
     const pathId = id ? `/${id}` : '';
     this.uri = `https://${host}/webservice/v1/${this.table}${pathId}`;
   }

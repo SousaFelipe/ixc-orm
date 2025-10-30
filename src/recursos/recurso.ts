@@ -20,7 +20,6 @@ export default async function recurso({
     const response = await axios.get(src, { data });
 
     if (response.status === 200) {
-
       const { data } = response;
       const { message, mensagem, ...rest } = data;
       

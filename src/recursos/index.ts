@@ -1,6 +1,7 @@
 import cliente_contrato_btn_lib_temp_24722 from './cliente_contrato_btn_lib_temp_24722';
 import desbloqueio_confianca from './desbloqueio_confianca';
 import get_boleto from './get_boleto';
+import radusuarios_25452 from './radusuarios_25452';
 
 
 /**
@@ -44,6 +45,14 @@ export const Recurso = {
    * contendo o conteúdo do boleto, caso a requisição seja bem-sucedida
    */
   getArquivoBoleto: get_boleto,
+
+  /**
+   * Envia uma requisição à API do IXC Provedor, para que o endereço de MAC seja removido do cadastro de um determinado PPPoE.
+   * 
+   * @param id_login O ID do PPPoE que se deseja remover o endereço de MAC.
+   * @returns A instância de um **IxcResponse**.
+   */
+  limparMAC: radusuarios_25452,
   
   /**
    * Solicita ao IXC que libere, por 72 horas, o contrato de um cliente bloqueado, que não tenha

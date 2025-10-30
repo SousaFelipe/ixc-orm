@@ -1,4 +1,5 @@
 # 🔄 CHANGELOG
+- [v1.9.0 - 90 de outubro de 2025](#v190)
 - [v1.8.0 - 18 de outubro de 2025](#v180)
 - [v1.7.1 - 18 de outubro de 2025](#v171)
 - [v1.7.0 - 10 de outubro de 2025](#v170)
@@ -10,6 +11,9 @@
 
 ## 🚀 Novidades
 
+### v1.9.0
+* **Melhoria:** Novo recurso para remoção de MAC de um PPPoE, através do recurso `radusuarios_25452`, que é disponibilizado pela própria API do IXC Provedor. Para utilizar o recurso, invocar o método assícrono `Recurso.limparMAC({ id_login: number });`. O método irá retornar a instãncia de um <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>.
+
 ### v1.8.0
 * **Melhoria:** O processo de carregamento do ambiente consegue detectar se as variáveis já foram carregas por um container Docker e interrompe o carregamento através do `.env`, evitando que a aplicação encerre o processo com erro..
 * **Correção:** Corrigida incompatibilidade com o cache do `pnpm`. Ao tentar carregar as variáveis diretamente do arquivo `.env`, o ambiente buscará o arquivo de forma recursiva, para conseguir encontrá-lo mesmo quando a biblioteca interpretar a pasta `node_modules` como root. (ocorre em alguns cenários muito específicos, apenas com o `pnpm`), evitando que o processo seja encerrado com erro.
@@ -19,21 +23,21 @@
 
 ### v1.7.0
 * **Atualização:** Novas classes adiconadas, para simplificar a manipulação dos filtros de busca e das respostas da API do **IXC Provedor**.
-    * A nova classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> pode substituir a classe `IXCCliente` e fornece uma maneira mais dinâmica de construir a query de busca, através dos métodos `where()`, `like()`, `exactly()`, `lessThan()`, `lessThanEquals()`, `greaterThan()` e `greaterThanEquals()`.
-    * Toda a lógica de manipulação das requisições HTTP foi movida para a nova classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>, deixando a classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> apenas com a lógica de manipulação da query de busca.
-    * Os dados da resposta recebida da API do IXC Provedor agora estão todos concentrados na classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcResponse.ts">IxcResponse</a>, quando instanciada pelos métodos `GET()`, `POST()`, `PUT()` e `DELETE()`, da classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>.
-    * A classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> é uma subclasse de <a href="https://github.com/SousaFelipe/ixcorm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>.
+* A nova classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> pode substituir a classe `IXCCliente` e fornece uma maneira mais dinâmica de construir a query de busca, através dos métodos `where()`, `like()`, `exactly()`, `lessThan()`, `lessThanEquals()`, `greaterThan()` e `greaterThanEquals()`.
+* Toda a lógica de manipulação das requisições HTTP foi movida para a nova classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>, deixando a classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> apenas com a lógica de manipulação da query de busca.
+* Os dados da resposta recebida da API do IXC Provedor agora estão todos concentrados na classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcResponse.ts">IxcResponse</a>, quando instanciada pelos métodos `GET()`, `POST()`, `PUT()` e `DELETE()`, da classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>.
+* A classe <a href="https://github.com/SousaFelipe/ixc-orm/blob/builders/src/IxcOrm.ts">IxcOrm</a> é uma subclasse de <a href="https://github.com/SousaFelipe/ixcorm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>.
 
 ### v1.6.0
 * **Melhoria**: Métodos específicos para chamadas de recursos da API do **IXC Provedor**
-    * `desbloqueioDeConfianca()`: Envia uma requisição para o recurso de desbloqueio de confiança de um contrato.
-    * `liberacaoTemporaria()`: Envia uma requisição para o recurso de liberação temporária de um contrato.
-    * `getArquivoBoleto()`: Recupera o arquivo de uma fatura, no formato PDF, codificado em <a href="https://en.wikipedia.org/wiki/Base64">Base64</a>.
+* `desbloqueioDeConfianca()`: Envia uma requisição para o recurso de desbloqueio de confiança de um contrato.
+* `liberacaoTemporaria()`: Envia uma requisição para o recurso de liberação temporária de um contrato.
+* `getArquivoBoleto()`: Recupera o arquivo de uma fatura, no formato PDF, codificado em <a href="https://en.wikipedia.org/wiki/Base64">Base64</a>.
 
 ### v1.5.0
 * **Melhoria:** A chamada de recursos da API agora pode ser feita de forma mais simplificada, através da função `RecursoIXC`:
-    * Basta importar assim: `import { RecursoIXC } from 'ixc-orm'`;
-    * E chamar assim: `await RecursoIXC('get_boleto', { id_fatura: 25484 })`.
+* Basta importar assim: `import { RecursoIXC } from 'ixc-orm'`;
+* E chamar assim: `await RecursoIXC('get_boleto', { id_fatura: 25484 })`.
 
 ### v1.4.4
 * **Melhoria:** Foi adicionado um método `find()` a classe `IXCClient`, para encontrar um registro pelo seu `id` de uma forma mais simplificada.

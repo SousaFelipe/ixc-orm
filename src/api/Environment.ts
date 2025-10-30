@@ -11,7 +11,7 @@ export default class Environment {
   declare private token: string;
 
 
-  static getInstance() {
+  static loadInstance(): Environment {
     if (!Environment.instance) {
       Environment.instance = new Environment();
     }
@@ -26,7 +26,7 @@ export default class Environment {
   }
 
 
-  private shouldToLoadDotEnvFile() : void {
+  private shouldToLoadDotEnvFile(): void {
     if (this.envHasBeenLoaded()) {
       return;
     }
@@ -34,15 +34,13 @@ export default class Environment {
   }
 
 
-  private envHasBeenLoaded() : boolean {
+  private envHasBeenLoaded(): boolean {
     const allEnvVars = Object.keys(process.env);
-    return allEnvVars.some(envVar => {
-      return envVar.startsWith('IXC_');
-    });
+    return allEnvVars.some(envVar => envVar.startsWith('IXC_'));
   }
 
 
-  private loadEnvFromEnvFile() : void {
+  private loadEnvFromEnvFile(): void {
     const fileUtil = new Utils.File();
     const envfile = fileUtil.findFile('.env');
     const env = dotenv.config({
@@ -56,7 +54,7 @@ export default class Environment {
   }
 
 
-  private setDomain(domain?: string) {
+  private setDomain(domain?: string): void {
     const newDomainIsValid = !(!domain?.length);
     const oldDomainIsValid = !this.domain?.length;
     if (newDomainIsValid && oldDomainIsValid) {
@@ -65,7 +63,7 @@ export default class Environment {
   }
 
 
-  private setToken(token?: string) {
+  private setToken(token?: string): void {
     const newTokenIsValid = !(!token?.length);
     const oldTokenisValid = !this.token?.length;
     if (newTokenIsValid && oldTokenisValid) {
@@ -74,12 +72,12 @@ export default class Environment {
   }
 
 
-  getDomain() {
+  getDomain(): string {
     return this.domain;
   }
 
 
-  getToken() {
+  getToken(): string {
     return this.token;
   }
 }

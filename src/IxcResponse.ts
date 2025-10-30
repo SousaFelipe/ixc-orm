@@ -1,4 +1,3 @@
-import { JSDOM } from 'jsdom';
 
 
 export default class IxcResponse {
@@ -39,7 +38,7 @@ export default class IxcResponse {
    * @returns **true** se o corpo da mensagem estiver dentro de tags HTML e se a mensagem dentro das tags
    * contiver a palavra "erro". Ou se o objeto da resposta possuir a propriedade { "type": "error", ... }.
    */
-  fail() : boolean {
+  fail(): boolean {
     const hasHtml = this.responseTextHasHtml();
     const hasError = this.message().includes('erro');
     if (hasHtml && hasError) {
@@ -56,7 +55,7 @@ export default class IxcResponse {
    * 
    * @returns O total de registros encontrados.
    */
-  total() : number {
+  total(): number {
     if (!this.data?.total) {
       return 0;
     }
@@ -68,7 +67,7 @@ export default class IxcResponse {
    * 
    * @returns O valor numérico da página.
    */
-  page() : number {
+  page(): number {
     if (!this.data?.page) {
       return 0;
     }
@@ -80,11 +79,11 @@ export default class IxcResponse {
    * 
    * @returns Uma mensagem de falha.
    */
-  message() : string {
+  message(): string {
     if (!this.data?.message) {
       return '';
     }
-    return this.data.message;
+    return this.data.message.replaceAll('<br />', '. ');
   }
 
   /**
@@ -92,31 +91,32 @@ export default class IxcResponse {
    * 
    * @returns Uma lista de objetos.
    */
-  registros() : Array<{[key: string]: any}> {
+  registros(): Array<{[key: string]: any}> {
     if (!this.data?.registros) {
       return [];
     }
     return this.data.registros;
   }
 
-  private responseTextHasHtml() : boolean {
+  private responseTextHasHtml(): boolean {
     return !(!this.text?.length) && this.text.startsWith('<div style=');
   }
 
-  private createDataFromText() : {[key: string]: any} {
+  private createDataFromText(): {[key: string]: any} {
     if (this.responseTextHasHtml()) {
       return this.createDataFromHtml();
     }
     return JSON.parse(this.text);
   }
 
-  private createDataFromHtml() : {[key: string]: any} {
-    const dom = new JSDOM(this.text);
+  private createDataFromHtml(): {[key: string]: any} {
+    const parser = new DOMParser();
+    const document = parser.parseFromString(this.text, 'text/html');
     return {
       type: 'error',
       page: 0,
       total: 0,
-      message: dom.window.document.body.textContent
+      message: document.body.textContent
     };
   }
 }
