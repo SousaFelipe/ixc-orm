@@ -33,7 +33,7 @@ yarn add ixc-orm
 Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é necessário adicionar as seguintes variáveis de ambiente a um arquivo `.env`, que esteja localizado no diretório raiz do seu projeto.
 
 > [!NOTE]\
-> Versão 1.8.0 `stable`
+> Versão 1.9.0 `stable`
 
 - **IXC_ACCESS_TOKEN** Um token de API gerado dentro do IXC Provedor.
 - **IXC_SERVER_DOMAIN** O domínio do seu servidor IXC Provedor.
@@ -70,7 +70,7 @@ IXC_TOKEN="8:k4n8wk1946j7mimthei869cq1zz2u940f2gqobqg081y2oefl80mzhtq2wud3gqp"
 As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
-> Versão 1.8.0 `stable`
+> Versão 1.9.0 `stable`
 
 ```typescript
 import { IxcOrm } from 'ixc-orm';
@@ -97,7 +97,7 @@ class Contrato extends IXCClient {
 Após instanciar um objeto com o tipo que você criou (`Contrato, como no exemplo a cima`), você poderá acessar os métodos de construção da query de busca.
 
 > [!NOTE]\
-> Versão 1.8.0 `stable`
+> Versão 1.9.0 `stable`
 
 ```typescript
 import { IxcResponse, Sort } from 'ixc-orm';
@@ -154,7 +154,7 @@ const response = await Recurso.desbloqueioDeConfianca(id_contrato);
 ```
 
 > Dos recursos disponibilizados pela API do **IXC Provedor**, essa biblioteca já implementou:\
-> `get_boleto`, `desbloqueio_confianca` e `cliente_contrato_btn_lib_temp_24722`.\
+> `get_boleto`, `desbloqueio_confianca`, `cliente_contrato_ativar_cliente` e `cliente_contrato_btn_lib_temp_24722`.\
 > Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo através da sua documentação oficial.
 
 
