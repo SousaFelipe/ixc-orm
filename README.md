@@ -33,7 +33,7 @@ yarn add ixc-orm
 Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é necessário adicionar as seguintes variáveis de ambiente a um arquivo `.env`, que esteja localizado no diretório raiz do seu projeto.
 
 > [!NOTE]\
-> Versão 1.9.0 `stable`
+> Versão 1.10.1 `stable`
 
 - **IXC_ACCESS_TOKEN** Um token de API gerado dentro do IXC Provedor.
 - **IXC_SERVER_DOMAIN** O domínio do seu servidor IXC Provedor.
@@ -57,20 +57,10 @@ services:
 ```
 
 
-> Versão 1.6.0 ou anterior:
-
-- **IXC_HOST** A url do seu servidor IXC Provedor.
-- **IXC_TOKEN** Um token de API gerado dentro do IXC Provedor.
-
-```ini
-IXC_HOST="https://dominiodoservidorixc.com.br/webservice/v1"
-IXC_TOKEN="8:k4n8wk1946j7mimthei869cq1zz2u940f2gqobqg081y2oefl80mzhtq2wud3gqp"
-```
-
 As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
-> Versão 1.9.0 `stable`
+> Versão 1.10.1 `stable`
 
 ```typescript
 import { IxcOrm } from 'ixc-orm';
@@ -82,22 +72,11 @@ class Contrato extends IxcOrm {
 }
 ```
 
-> Versão 1.6.0 ou anterior
-
-```typescript
-import { IXCClient } 'ixc-orm';
-
-class Contrato extends IXCClient {
-  constructor() {
-    super('cliente_contrato');
-  }
-}
-```
 
 Após instanciar um objeto com o tipo que você criou (`Contrato, como no exemplo a cima`), você poderá acessar os métodos de construção da query de busca.
 
 > [!NOTE]\
-> Versão 1.9.0 `stable`
+> Versão 1.10.1 `stable`
 
 ```typescript
 import { IxcResponse, Sort } from 'ixc-orm';
@@ -113,49 +92,21 @@ IxcResponse response = await contrato
 const contratos = response.registros(); 
 ```
 
-> Versão 1.6.0 ou anterior
-
-```typescript
-const contrato = new Contrato();
-
-const contratos = await contrato
-  .where(['id_cliente', 240])
-  .where(['data_ativacao', '>=', '2024-09-24 00:45:00'])
-  .orderBy('data_ativacao', 'desc')
-  .get()
-```
-
-Ou quando você já possui o ID do registro que procura, a opção mais simples será utilizar o método `find()`. Este método também está implementado na classe `IXCClient`
-
-> [!NOTE]
-> Método disponível apenas para as subclasses de `IXCClient`.
-
-```typescript
-const contrato = new Contrato();
-
-const id_contrato = 4574;
-
-const contratos = await contrato.find(id_contrato)
-```
-
 
 ## Recursos da API do IXC Provedor
 
-Existem alguns `endpoints` que a API do IXC disponibiliza, a fim de "encurtar o caminho" para chegar até algumas informações. Como por exemplo, obter o arquivo PDF de uma fatura.\
-Para isso, você não precisará se preocupar em criar uma classe `Boleto` que herde da classe `IxcOrm`, por exemplo,\
-nem encadear chamadas de filtros. Basta fazer como no exemplo a seguir:
+Existem alguns `endpoints` que a API do IXC Provedor disponibiliza, a fim de "encurtar o caminho" para chegar até algumas informações. Como por exemplo, obter o arquivo PDF de uma fatura. Para isso, você não precisará se preocupar em criar uma classe `Boleto` que herde da classe `IxcOrm`, por exemplo, nem encadear chamadas de filtros. Basta fazer como no exemplo a seguir:
 
 ```typescript
 import { Recurso } from 'ixc-orm';
 
 const id_contrato = 45852;
-
-const response = await Recurso.desbloqueioDeConfianca(id_contrato);
+const response = await Recurso.desbloqueioDeConfianca({ id_contrato });
 ```
 
-> Dos recursos disponibilizados pela API do **IXC Provedor**, essa biblioteca já implementou:\
-> `get_boleto`, `desbloqueio_confianca`, `cliente_contrato_ativar_cliente` e `cliente_contrato_btn_lib_temp_24722`.\
-> Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo através da sua documentação oficial.
+> Dos recursos disponibilizados pela API do **IXC Provedor**, essa biblioteca já possui as implementações de:\
+> `cliente_contrato_ativar_cliente`, `cliente_contrato_btn_lib_temp_24722`, `desbloqueio_confianca`, `get_boleto` e `radusuarios_25452`.\
+> Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo através da sua própria documentação oficial.
 
 
 # Contribuições
