@@ -99,9 +99,10 @@ export default class IxcResponse {
   }
 
   /**
-   * Obtém o conteúdo bruto de da resposta da API do IXC Provedor.
-   * Este método substitui o método `registros()`, quando a requisição é feita para um endpoint de 
-   * recursos do IXC Provedor, que devolve uma resposta bruta ao invés de uma lista de registros.
+   * Obtém o conteúdo bruto de uma resposta da API do IXC Provedor.
+   * Este método substitui o método `registros()`, quando a requisição é feita para um endpoint
+   * específico de recursos do IXC Provedor, mas apenas quando a API devolve uma resposta bruta ao
+   * invés de uma lista de registros, ou uma mensagem.
    * 
    * @returns Uma string contendo o conteúdo da resposta da API do IXC Provedor.
    */
