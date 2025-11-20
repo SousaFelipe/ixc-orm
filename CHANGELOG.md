@@ -1,5 +1,5 @@
 # 🔄 CHANGELOG
-- [v1.10.1 - 20 de novembro de 2025](#v1101)
+- [v1.10.2 - 20 de novembro de 2025](#v1102)
 - [v1.9.0 - 09 de outubro de 2025](#v190)
 - [v1.8.0 - 18 de outubro de 2025](#v180)
 - [v1.7.1 - 18 de outubro de 2025](#v171)
@@ -12,8 +12,8 @@
 
 ## 🚀 Novidades
 
-### v1.10.1
-* **Melhoria:** O recurso que obtém um arquivi PDF de um boleto `Recurso.getArquivoBoleto()`, passou a utilizar o RequestEmitter da API para executar a requisição. Além disso, a resposta desse recurso será uma string decodificada contendo o conteúdo do PDF do boleto, ao invés de um objeto `IXCResponse`.
+### v1.10.2
+* **Melhoria:** O recurso `Recurso.getArquivoBoleto()`, que obtém um arquivo PDF de um boleto, passou a utilizar o 'RequestEmitter' da API para executar a requisição. A resposta desse recurso será uma Promise contendo a instância de um objeto do tipo `IxcResponse`.
 
 ### v1.9.0
 * **Melhoria:** Novo recurso para remoção de MAC de um PPPoE, através do recurso `radusuarios_25452`, que é disponibilizado pela própria API do IXC Provedor. Para utilizar o recurso, invocar o método assícrono `Recurso.limparMAC({ id_login: number });`. O método irá retornar a instãncia de um <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>.
