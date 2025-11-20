@@ -98,20 +98,43 @@ export default class IxcResponse {
     return this.data.registros;
   }
 
+  /**
+   * Obtém o conteúdo bruto de da resposta da API do IXC Provedor.
+   * Este método substitui o método `registros()`, quando a requisição é feita para um endpoint de 
+   * recursos do IXC Provedor, que devolve uma resposta bruta ao invés de uma lista de registros.
+   * 
+   * @returns Uma string contendo o conteúdo da resposta da API do IXC Provedor.
+   */
+  content(): string {
+    return this.text;
+  }
+
+
   private responseTextHasHtml(): boolean {
     return !(!this.text?.length) && this.text.startsWith('<div style=');
   }
 
+
   private createDataFromText(): {[key: string]: any} {
+    
     if (this.responseTextHasHtml()) {
       return this.createDataFromHtml();
     }
-    return JSON.parse(this.text);
+
+    try {
+      return JSON.parse(this.text);
+    }
+    catch (error) {
+      return {};
+    }
   }
 
+
   private createDataFromHtml(): {[key: string]: any} {
+    
     const parser = new DOMParser();
     const document = parser.parseFromString(this.text, 'text/html');
+    
     return {
       type: 'error',
       page: 0,

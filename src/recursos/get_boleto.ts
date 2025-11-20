@@ -1,42 +1,27 @@
-import { createAxiosInstance } from '../request';
-import { createResponse } from '../response';
-import { IXCRecursoResponse, IXCResponse } from '../types';
+import RequestEmitter from '../api/RequestEmitter';
+import IxcResponse from '../IxcResponse';
 
 
 
-const SRC = 'get_boleto';
+const src = 'get_boleto';
 
 
 
 export default async function get_boleto(
   args: { id_fatura?: string | number }
-): Promise<IXCResponse | IXCRecursoResponse> {
+): Promise<IxcResponse> {
 
-  const axios = createAxiosInstance('PUT');
+  const { id_fatura } = args;
+  const requestEmitter = new RequestEmitter(src);
 
-  try {
-    const { id_fatura } = args;
+  requestEmitter.setupQuery({
+    boletos: id_fatura,
+    juro: 'S',
+    multa: 'S',
+    atualiza_boleto: 'S',
+    tipo_boleto: 'arquivo',
+    base64: 'S'
+  });
 
-    const response = await axios.get(SRC, {
-      data: {
-        boletos: id_fatura,
-        juro: 'S',
-        multa: 'S',
-        atualiza_boleto: 'S',
-        tipo_boleto: 'arquivo',
-        base64: 'S'
-      }
-    });
-
-    if (response.status === 200) {
-      return {
-        data: response.data
-      };
-    }
-  }
-  catch (error: any) {
-    console.error(`Erro ao executar recurso: ${SRC}\n`, error);
-  }
-
-  return createResponse({ error: true });
+  return await requestEmitter.sendRequestToResource();
 }
