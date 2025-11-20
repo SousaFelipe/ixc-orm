@@ -1,5 +1,5 @@
 # 🔄 CHANGELOG
-- [v1.10.2 - 20 de novembro de 2025](#v1102)
+- [v1.10.4 - 20 de novembro de 2025](#v1104)
 - [v1.9.0 - 09 de outubro de 2025](#v190)
 - [v1.8.0 - 18 de outubro de 2025](#v180)
 - [v1.7.1 - 18 de outubro de 2025](#v171)
@@ -12,7 +12,7 @@
 
 ## 🚀 Novidades
 
-### v1.10.2
+### v1.10.4
 * **Melhoria:** O recurso `Recurso.getArquivoBoleto()`, que obtém um arquivo PDF de um boleto, passou a utilizar o 'RequestEmitter' da API para executar a requisição. A resposta desse recurso será uma Promise contendo a instância de um objeto do tipo `IxcResponse`.
 
 ### v1.9.0

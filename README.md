@@ -33,7 +33,7 @@ yarn add ixc-orm
 Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é necessário adicionar as seguintes variáveis de ambiente a um arquivo `.env`, que esteja localizado no diretório raiz do seu projeto.
 
 > [!NOTE]\
-> Versão 1.10.3 `stable`
+> Versão 1.10.4 `stable`
 
 - **IXC_ACCESS_TOKEN** Um token de API gerado dentro do IXC Provedor.
 - **IXC_SERVER_DOMAIN** O domínio do seu servidor IXC Provedor.
@@ -60,7 +60,7 @@ services:
 As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
-> Versão 1.10.3 `stable`
+> Versão 1.10.4 `stable`
 
 ```typescript
 import { IxcOrm } from 'ixc-orm';
@@ -76,7 +76,7 @@ class Contrato extends IxcOrm {
 Após instanciar um objeto com o tipo que você criou (`Contrato, como no exemplo a cima`), você poderá acessar os métodos de construção da query de busca.
 
 > [!NOTE]\
-> Versão 1.10.3 `stable`
+> Versão 1.10.4 `stable`
 
 ```typescript
 import { IxcResponse, Sort } from 'ixc-orm';
