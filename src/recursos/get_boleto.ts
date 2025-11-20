@@ -1,5 +1,4 @@
 import RequestEmitter from '../api/RequestEmitter';
-import IxcResponse from '../IxcResponse';
 
 
 
@@ -9,7 +8,7 @@ const src = 'get_boleto';
 
 export default async function get_boleto(
   args: { id_fatura?: string | number }
-): Promise<IxcResponse> {
+): Promise<string> {
 
   const { id_fatura } = args;
   const requestEmitter = new RequestEmitter(src);
@@ -23,5 +22,24 @@ export default async function get_boleto(
     base64: 'S'
   });
 
-  return await requestEmitter.sendRequestToResource();
+  const response = await requestEmitter.sendRequestToResource();
+  const content = response.content();
+  return contentConvertedToPDF(content);
+}
+
+
+function contentConvertedToPDF(content: string): string {
+  
+  const bits = atob(content);
+  if (!bits.length) {
+    return '';
+  }
+
+  const bytes = new Uint8Array(bits.length);
+  for (let i = 0; i < bits.length; i++) {
+    bytes[i] = bits.charCodeAt(i);   
+  }
+
+  const decoder = new TextDecoder('utf-8');
+  return decoder.decode(bytes);
 }
