@@ -1,4 +1,5 @@
 # 🔄 CHANGELOG
+- [v1.10.5 - 20 de dezembro de 2025](#v1105)
 - [v1.10.4 - 20 de novembro de 2025](#v1104)
 - [v1.9.0 - 09 de outubro de 2025](#v190)
 - [v1.8.0 - 18 de outubro de 2025](#v180)
@@ -10,13 +11,18 @@
 - [v1.4.3 - 15 de agosto de 2025](#v143)
 - [v1.4.1 - 14 de agosto de 2025](#v141)
 
+
 ## 🚀 Novidades
 
+
+### v1.10.5
+* **Correção:** Removida a utilização da biblioteca nativa DOMParser, que quebrava ao tentar extrair a mensagem de erro de uma resposta do IXC Provedor.
+
 ### v1.10.4
-* **Melhoria:** O recurso `Recurso.getArquivoBoleto()`, que obtém um arquivo PDF de um boleto, passou a utilizar o 'RequestEmitter' da API para executar a requisição. A resposta desse recurso será uma Promise contendo a instância de um objeto do tipo `IxcResponse`.
+* **Melhoria:** O recurso `Recurso.getArquivoBoleto()`, que obtém um arquivo PDF de um boleto, passou a utilizar o 'RequestEmitter' da API para executar a requisição. A resposta desse recurso será uma Promise contendo a instância de um objeto do tipo <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>.
 
 ### v1.9.0
-* **Melhoria:** Novo recurso para remoção de MAC de um PPPoE, através do recurso `radusuarios_25452`, que é disponibilizado pela própria API do IXC Provedor. Para utilizar o recurso, invocar o método assícrono `Recurso.limparMAC({ id_login: number });`. O método irá retornar a instãncia de um <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>.
+* **Melhoria:** Novo recurso para remoção de MAC de um PPPoE, através do recurso `radusuarios_25452`, que é disponibilizado pela própria API do IXC Provedor. Para utilizar o recurso, invocar o método assícrono `Recurso.limparMAC({ id_login: number });`. O método irá retornar a instância de um <a href="https://github.com/SousaFelipe/ixc-orm/blob/main/src/IxcResponse.ts">IxcResponse</a>.
 
 ### v1.8.0
 * **Melhoria:** O processo de carregamento do ambiente consegue detectar se as variáveis já foram carregas por um container Docker e interrompe o carregamento através do `.env`, evitando que a aplicação encerre o processo com erro..

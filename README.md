@@ -33,7 +33,7 @@ yarn add ixc-orm
 Para configurar a comunicação da biblioteca com seu servidor IXC Provedor, é necessário adicionar as seguintes variáveis de ambiente a um arquivo `.env`, que esteja localizado no diretório raiz do seu projeto.
 
 > [!NOTE]\
-> Versão 1.10.4 `stable`
+> Versão 1.10.5 `stable`
 
 - **IXC_ACCESS_TOKEN** Um token de API gerado dentro do IXC Provedor.
 - **IXC_SERVER_DOMAIN** O domínio do seu servidor IXC Provedor.
@@ -60,7 +60,7 @@ services:
 As classes que representarão os diferentes tipos de registros no seu **IXC Provedor**, deverão herdar da classe `IxcOrm` (nova versão), como no exemplo a seguir:
 
 > [!NOTE]\
-> Versão 1.10.4 `stable`
+> Versão 1.10.5 `stable`
 
 ```typescript
 import { IxcOrm } from 'ixc-orm';
@@ -76,7 +76,7 @@ class Contrato extends IxcOrm {
 Após instanciar um objeto com o tipo que você criou (`Contrato, como no exemplo a cima`), você poderá acessar os métodos de construção da query de busca.
 
 > [!NOTE]\
-> Versão 1.10.4 `stable`
+> Versão 1.10.5 `stable`
 
 ```typescript
 import { IxcResponse, Sort } from 'ixc-orm';
@@ -104,16 +104,22 @@ const id_contrato = 45852;
 const response = await Recurso.desbloqueioDeConfianca({ id_contrato });
 ```
 
-> Dos recursos disponibilizados pela API do **IXC Provedor**, essa biblioteca já possui as implementações de:\
-> `cliente_contrato_ativar_cliente`, `cliente_contrato_btn_lib_temp_24722`, `desbloqueio_confianca`, `get_boleto` e `radusuarios_25452`.\
-> Obs: Os nomes dos recursos estão de acordo com a API do **IXC Provedor** a fim de facilitar o estudo através da sua própria documentação oficial.
+
+### Recursos disponíveis:
+
+| Recurso IXC | Método da biblioteca | Descrição
+| :---------- | :--------- | :---------- |
+| ativaContrato({ id_contrato }) | cliente_contrato_ativar_cliente | Ativa um contrato que esteja com o status de `pré-contrato` |
+| desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente que já tenha sido desbloqueado |
+| getArquivoBoleto({ id_fatura }) | get_boleto | Obtém uma string base64 com o conteúdo do PDF da fatura de um cliente |
+| limparMAC({ id_login }) | radusuarios_25452 | Remove o endereço de MAC do login de um cliente |
+| liberacaoTemporaria({ id_contrato }) | cliente_contrato_btn_lib_temp_24722 | Desbloqueia, por 72 horas, o contrato de um cliente bloqueado |
 
 
 # Contribuições
 
 Contribuições são sempre bem-vindas!\
 Se você conhece uma maneira melhor de fazer algo, por favor, me avise!
-Caso contrário, é sempre melhor fazer um PR na branch main.
 
 At.te,\
 <b>Felipe S. Carmo</b>.

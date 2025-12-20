@@ -1,3 +1,4 @@
+import cliente_contrato_ativar_cliente from './cliente_contrato_ativar_cliente';
 import cliente_contrato_btn_lib_temp_24722 from './cliente_contrato_btn_lib_temp_24722';
 import desbloqueio_confianca from './desbloqueio_confianca';
 import get_boleto from './get_boleto';
@@ -24,6 +25,17 @@ type Recursos = typeof recursos;
 export const Recurso = {
 
   /**
+   * Ativa o contrato de um cliente que esteja com o status de "pré-contrato". Este recurso não
+   * é capaz de ativar contratos que tenha sido desativados, ou estejam bloqueados.
+   * 
+   * @description Corresponde ao recurso `cliente_contrato_ativar_cliente`
+   * 
+   * @param id_contrato O ID do contrato que se deseja ativar
+   * @returns Um objeto **IxcResponse** contendo a resposta enviada pelo IXC
+   */
+  ativaContrato: cliente_contrato_ativar_cliente,
+
+  /**
    * Solicita ao IXC que desbloqueie o contrato de um cliente bloqueado, que já solicitou
    * a liberação temporária dentro de um período de 30 dias. Este recurso só funciona, caso
    * a opção de desbloqueio de confiança esteja ativada, no contrato do cliente, dentro do IXC.
@@ -41,7 +53,7 @@ export const Recurso = {
    * @description Corresponde ao recurso `get_boleto`
    * 
    * @param id_fatura O ID da fatura
-   * @returns Um **IXCResponse**, caso a requisição falhe, ou um **IXCRecursoResponse**
+   * @returns Um **IxcResponse**, caso a requisição falhe, ou um **IXCRecursoResponse**
    * contendo o conteúdo do boleto, caso a requisição seja bem-sucedida
    */
   getArquivoBoleto: get_boleto,
