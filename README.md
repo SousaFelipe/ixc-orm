@@ -107,7 +107,7 @@ const response = await Recurso.desbloqueioDeConfianca({ id_contrato });
 
 ### Recursos disponíveis:
 
-| Recurso IXC | Método da biblioteca | Descrição
+| Método da biblioteca  | Recurso IXC | Descrição
 | :---------- | :--------- | :---------- |
 | ativaContrato({ id_contrato }) | cliente_contrato_ativar_cliente | Ativa um contrato que esteja com o status de `pré-contrato` |
 | desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente que já tenha sido desbloqueado |
