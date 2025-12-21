@@ -132,15 +132,15 @@ export default class IxcResponse {
 
 
   private createDataFromHtml(): {[key: string]: any} {
-    
-    const parser = new DOMParser();
-    const document = parser.parseFromString(this.text, 'text/html');
+
+    const match = this.text.match(/>(.*?)<\/div>/);
+    const message = match ? match[1] : undefined;
     
     return {
       type: 'error',
       page: 0,
       total: 0,
-      message: document.body.textContent
+      message
     };
   }
 }

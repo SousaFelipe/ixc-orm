@@ -1,6 +1,6 @@
 {
   "name": "ixc-orm",
-  "version": "1.10.3",
+  "version": "1.10.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -40,7 +40,6 @@
     "@jest/globals": "^30.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/jest": "^30.0.0",
-    "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.1",
     "babel-jest": "^30.2.0",
     "jest": "^30.2.0",

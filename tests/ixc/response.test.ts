@@ -13,22 +13,27 @@ class Cliente extends IxcOrm {
 
 describe('IxcResponse', () => {
 
-  it('deve retornar uma mensagem e erro', async () => {
+
+  it('deve retornar uma mensagem de erro', async () => {
     const response = await Cliente.newCliente()
-        .where('campo_inexistente')
-        .exactly('tchu biraum daum daum')
+        .where('campo_nao_existente')
+        .exactly('Kurapika está se afogando em um vazio indescritível')
         .GET();
+
     expect(response.fail()).toBeTruthy();
-    expect(response.message().length).toBeGreaterThan(0);
+    expect(response.message()).toBe('Ocorreu um erro ao processar. Contate o suporte IXC Soft.')
+
   });
 
-  it('não deve retornar uma mensagem e erro', async () => {
+
+  it('não deve retornar uma mensagem de erro', async () => {
     const response = await Cliente.newCliente()
         .where('cnpj_cpf')
-        .exactly('123.456.789-10') // Inserir CPF de um cliente cadastrado no IXC Provedor.
+        .exactly('025.076.083-58') // Inserir CPF de um cliente cadastrado no IXC Provedor.
         .GET();
+
     expect(response.fail()).toBeFalsy();
-    expect(response.message().length).toBeLessThan(1);
+    expect(response.message().length).toBeLessThan(1)
   });
 
 });
