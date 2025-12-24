@@ -14,7 +14,7 @@ export default async function radusuarios_25452(
   const { id_login } = args;
 
   if (!id_login || id_login === '0') {
-    throw new Error('IXC-ORM::ERR > O parâmetro "id_login" não pode ser null, undefined ou 0.')
+    throw new Error('O parâmetro "id_login" não pode ser null, undefined ou 0.')
   }
   
   const requestEmitter = new RequestEmitter(src);

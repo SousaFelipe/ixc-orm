@@ -10,7 +10,6 @@ import Utils from './utils';
 Environment.loadInstance();
 
 
-
 export {
   Environment,
   IxcOrm,

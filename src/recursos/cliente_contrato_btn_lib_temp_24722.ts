@@ -14,7 +14,7 @@ export default async function cliente_contrato_btn_lib_temp_24722(
   const { id_contrato } = args;
 
   if (!id_contrato || id_contrato === '0') {
-    throw new Error('IXC-ORM::ERR > O parâmetro "id_contrato" não pode ser null, undefined ou 0.')
+    throw new Error('O parâmetro "id_contrato" não pode ser null, undefined ou 0.')
   }
 
   const requestEmitter = new RequestEmitter(src);
