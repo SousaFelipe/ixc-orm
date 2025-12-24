@@ -21,7 +21,7 @@ describe('IxcResponse', () => {
         .GET();
 
     expect(response.fail()).toBeTruthy();
-    expect(response.message().length).toBeGreaterThan(0);
+    expect(response.message()).toBe('Ocorreu um erro ao processar. Contate o suporte IXC Soft.')
 
   });
 
@@ -29,11 +29,11 @@ describe('IxcResponse', () => {
   it('não deve retornar uma mensagem de erro', async () => {
     const response = await Cliente.newCliente()
         .where('cnpj_cpf')
-        .exactly('123.456.789-10') // Inserir CPF de um cliente cadastrado no IXC Provedor.
+        .exactly('025.076.083-58') // Inserir CPF de um cliente cadastrado no IXC Provedor.
         .GET();
 
     expect(response.fail()).toBeFalsy();
-    expect(response.message().length).toBeLessThan(1);
+    expect(response.message().length).toBeLessThan(1)
   });
 
 });
