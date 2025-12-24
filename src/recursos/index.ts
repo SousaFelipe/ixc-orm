@@ -9,7 +9,6 @@ import radusuarios_25452 from './radusuarios_25452';
  * @deprecated Acesse os recursos através da constante {@link Recurso}
  */
 const recursos = {
-  cliente_contrato: cliente_contrato_btn_lib_temp_24722,
   desbloqueio_confianca,
   get_boleto
 };

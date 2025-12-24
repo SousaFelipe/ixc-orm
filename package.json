@@ -1,6 +1,6 @@
 {
   "name": "ixc-orm",
-  "version": "1.10.5",
+  "version": "1.10.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",

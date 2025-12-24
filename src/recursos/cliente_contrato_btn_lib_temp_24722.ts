@@ -1,5 +1,5 @@
-import { IXCResponse } from '../types';
-import recurso from './recurso';
+import RequestEmitter from '../api/RequestEmitter';
+import IxcResponse from '../IxcResponse';
 
 
 
@@ -9,14 +9,14 @@ const src = 'cliente_contrato_btn_lib_temp_24722';
 
 export default async function cliente_contrato(
   args: { id_contrato?: string | number }
-): Promise<IXCResponse> {
+): Promise<IxcResponse> {
   
   const { id_contrato } = args;
+  const requestEmitter = new RequestEmitter(src);
 
-  return await recurso({
-    src,
-    data: {
-      id_contrato
-    }
-  });
+  requestEmitter.setupQuery({
+    id: id_contrato
+  })
+
+  return await requestEmitter.sendRequestToResource();
 }
