@@ -5,23 +5,8 @@ import get_boleto from './get_boleto';
 import radusuarios_25452 from './radusuarios_25452';
 
 
-/**
- * @deprecated Acesse os recursos através da constante {@link Recurso}
- */
-const recursos = {
-  desbloqueio_confianca,
-  get_boleto
-};
 
-
-type Recursos = typeof recursos;
-
-
-/**
- * Disponibiliza, de forma simples e direta, o acesso a todos os recursos da API do IXC\
- * **ATENÇÃO** --- Nem todos os recursos da API do IXC foram implementados por esta biblioteca
- */
-export const Recurso = {
+export default {
 
   /**
    * Ativa o contrato de um cliente que esteja com o status de "pré-contrato". Este recurso não
@@ -76,18 +61,4 @@ export const Recurso = {
    */
   liberacaoTemporaria: cliente_contrato_btn_lib_temp_24722,
 
-};
-
-
-/**
- * *ATENÇÃO:* Esta função desá descontinuada
- * 
- * @deprecated Acesse os recursos através da constante {@link Recurso}
- */
-export default async function RecursoIXC<T extends keyof Recursos>(
-  recurso: T, args: Parameters<Recursos[T]>[0]
-) {
-  console.warn('Esta função será removida na próxima versão! Acesse os recursos através da constante "Recurso".');
-  const handler = recursos[recurso];
-  return await handler(args);
-}
+} as const;

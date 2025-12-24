@@ -12,6 +12,11 @@ export default async function get_boleto(
 ): Promise<IxcResponse> {
 
   const { id_fatura } = args;
+
+  if (!id_fatura || id_fatura === '0') {
+    throw new Error('IXC-ORM::ERR > O parâmetro "id_fatura" não pode ser null, undefined ou 0.')
+  }
+
   const requestEmitter = new RequestEmitter(src);
 
   requestEmitter.setupQuery({
