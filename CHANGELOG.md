@@ -1,4 +1,5 @@
 # 🔄 CHANGELOG
+- [v2.0.0 - 24 de dezembro de 2025](#v200)
 - [v1.10.6 - 23 de dezembro de 2025](#v1106)
 - [v1.10.5 - 20 de dezembro de 2025](#v1105)
 - [v1.10.4 - 20 de novembro de 2025](#v1104)
@@ -14,6 +15,9 @@
 
 
 ## 🚀 Novidades
+
+### v2.0.0
+* **Melhoria:** Adicionada verificação de erros nas respostas dos recursos. Todas as requisiões passaram a ser realizadas pela classe <a href="https://github.com/SousaFelipe/ixcorm/blob/builders/src/api/RequestEmitter.ts">RequestEmitter</a>, que utiliza a FetchAPI, por este motivo a dependência da biblioteca Axios foi removida completamente do projeto.
 
 ### v1.10.6
 * **Correção:** Removido o bug que ocorria ao tentar utilizar o recurso `liberacaoTemporaria({ id_contrato })` sem que as antigas variáveis de ambiente estivessem definidas.
