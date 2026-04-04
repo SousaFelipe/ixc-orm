@@ -56,4 +56,22 @@ describe('Listagem de registros', () => {
     expect(bloqueados.records().length).toBe(1);
   });
 
+
+  it('deve listar 20 contratos, utilizando o filtro "diferente de"', async () => {
+    const naoBloqueados = await Contrato.newContrato()
+      .paginate(1, 20)
+      .where('status_internet').not('CA')
+      .where('status_internet').not('CM')
+      .GET();
+
+    expect(naoBloqueados.records()).toBeDefined();
+    expect(naoBloqueados.records().length).toBe(20);
+
+    const bloqueados = naoBloqueados.records()
+      ?.filter(c => c.status_internet === 'CA' || c.status_internet === 'CM');
+
+    expect(bloqueados).toBeDefined();
+    expect(bloqueados.length).toBe(0);
+  });
+
 });
