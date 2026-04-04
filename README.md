@@ -103,7 +103,7 @@ const response = await Recurso.desbloqueioDeConfianca({ id_contrato });
 | Método da biblioteca | Recurso IXC | Descrição
 | :---------- | :--------- | :---------- |
 | ativaContrato({ id_contrato }) | cliente_contrato_ativar_cliente | Ativa um contrato no IXC Provedor |
-| desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente bloqueado |
+| desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente inadimplente |
 | getArquivoBoleto({ id_fatura }) | get_boleto | Obtém um base64 do PDF da fatura de um cliente |
 | limparMAC({ id_login }) | radusuarios_25452 | Remove o endereço de MAC do login de um cliente |
 | liberacaoTemporaria({ id_contrato }) | cliente_contrato_btn_lib_temp_24722 | Desbloqueia um contrato por 72h |
