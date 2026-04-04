@@ -19,10 +19,24 @@ export default abstract class IxcOrm extends RequestEmitter {
    */
   protected constructor(table: string) {
     super(table);
-    this.ordering = Ordering.ascBy(table, "id");
+    this.ordering = Ordering.ascBy(table, 'id');
     this.pagination = Pagination.defaults();
     this.parameters = [];
     this.parameterStub = new Parameter(table);
+  }
+
+  /**
+   * Sobrescreve a chamada para **emitRequest(Method)** na superclasse {@link RequestEmitter},
+   * enviando a requisição para a API do IXC Provedor e retorna o coteúdo em um string.
+   * 
+   * @param method GET, POST, PUT ou DELETE.
+   * @returns O conteúdo da resposta em uma string.
+   */
+  protected async emitRequest(method: string, body?: BodyInit): Promise<string> {
+    const result = await super.emitRequest(method, body);
+    this.parameters = [];
+    this.setupQuery({});
+    return result;
   }
 
   /**
@@ -31,103 +45,115 @@ export default abstract class IxcOrm extends RequestEmitter {
    * @param column O nome da coluna onde o filtro de busca será executado.
    * @returns A própria instância.
    */
-  where(column: string) : IxcOrm {
+  where(column: string): IxcOrm {
     this.parameterStub.withType(column);
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**L**) = LIKE.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**L**) = LIKE.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  like(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.LIKE);
-    this.parameterStub.withValue(value);
+  like(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.LIKE)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**=**) = EQUALS.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**=**) = EQUALS.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  exactly(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.EQUALS);
-    this.parameterStub.withValue(value);
+  exactly(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.EQUALS)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**<**) = LESS_THAN.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**<**) = LESS_THAN.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  lessThan(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.LESS_THAN);
-    this.parameterStub.withValue(value);
+  lessThan(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.LESS_THAN)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**<=**) = LESS_THAN_EQUALS.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**<=**) = LESS_THAN_EQUALS.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  lessThanEquals(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.LESS_THAN_EQUALS);
-    this.parameterStub.withValue(value);
+  lessThanEquals(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.LESS_THAN_EQUALS)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**>**) = GREATER_THAN.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**>**) = GREATER_THAN.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  greaterThan(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.GREATER_THAN);
-    this.parameterStub.withValue(value);
+  greaterThan(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.GREATER_THAN)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador (**>=**) = GREATER_THAN_EQUALS.
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * (**>=**) = GREATER_THAN_EQUALS.
    * 
    * @param value O valor a ser filtrado.
    * @returns A própria instância.
    */
-  greaterThanEquals(value: string | number) : IxcOrm {
-    this.parameterStub.withOperator(Operators.GREATER_THAN_EQUALS);
-    this.parameterStub.withValue(value);
+  greaterThanEquals(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.GREATER_THAN_EQUALS)
+      .withValue(value);
     this.addParamToGridAndResetStub();
     super.setupQuery(this.createQueryObject());
     return this;
   }
 
   /**
-   * Define o número da página e a quantidade de registros por página que serão retornados pelo IXc Provedor.
+   * Define o número da página e a quantidade de registros por página que serão retornados pelo IXC Provedor.
    * 
    * @param page A página a ser buscada.
    * @param rows A quantidade de registros por página.
    * @returns A própria instância.
    */
-  paginate(page: number, rows: number) {
+  paginate(page: number, rows: number): IxcOrm {
     this.pagination = new Pagination(page, rows);
     return this;
   }
@@ -139,19 +165,18 @@ export default abstract class IxcOrm extends RequestEmitter {
    * @param column A coluna que será utilizada para ordenar os registros.
    * @returns A própria instância.
    */
-  orderBy(column: string, sort: Sort) {
+  orderBy(column: string, sort: Sort): IxcOrm {
     this.ordering = (sort === Sort.ASC)
         ? Ordering.ascBy(super.getTable(), column)
         : Ordering.descBy(super.getTable(), column);
     return this;
   }
 
-
   private createQueryObject() {
     return {
       qtype: super.getTable(),
-      query: "",
-      oper: "",
+      query: '',
+      oper: '',
       page: this.pagination.getPage(),
       rp: this.pagination.getRows(),
       sortname: this.ordering.getSortName(),
@@ -160,8 +185,7 @@ export default abstract class IxcOrm extends RequestEmitter {
     };
   }
 
-
-  private addParamToGridAndResetStub() : void {
+  private addParamToGridAndResetStub(): void {
     this.parameters.push(this.parameterStub.toJsonObject());
     this.parameterStub = new Parameter(super.getTable());
   }
