@@ -11,7 +11,7 @@ export default class IxcResponse {
    * @param error Uma exceção capturada por um bloco try-catch.
    * @returns Um objeto de resposta do IXC Provedor.
    */
-  public static createResponseTextWithError(error: any) {
+  public static createResponseTextWithError(error: any): string {
     const response = {
       type: 'error',
       page: 0,
@@ -91,11 +91,21 @@ export default class IxcResponse {
    * 
    * @returns Uma lista de objetos.
    */
-  registros(): Array<{[key: string]: any}> {
+  records(): Array<Record<string, any>> {
     if (!this.data?.registros) {
       return [];
     }
     return this.data.registros;
+  }
+
+  /**
+   * Obtém a lista de registros retornados por uma consulta à API do IXC Provedor.
+   * @deprecated Esté método será descontinuado na versão 3.x.x. Utilize o método {@link records()}
+   * 
+   * @returns Uma lista de objetos.
+   */
+  registros(): Array<Record<string, any>> {
+    return this.records();
   }
 
   /**
