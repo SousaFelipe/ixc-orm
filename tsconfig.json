@@ -2,8 +2,6 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "declaration": true,
     "noUnusedLocals": true,
@@ -14,11 +12,11 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",
-    "**/*.test.ts",
-    "jest.config.ts"
+    "dist"
   ]
 }

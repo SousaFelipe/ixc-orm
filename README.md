@@ -52,7 +52,7 @@ services:
     environment:
       - IXC_ACCESS_TOKEN=${IXC_ACCESS_TOKEN}
       - IXC_SERVER_DOMAIN=${IXC_SERVER_DOMAIN}
-    # Outras configurações do seu serviço
+      - ...
 ```
 
 
@@ -102,18 +102,18 @@ const response = await Recurso.desbloqueioDeConfianca({ id_contrato });
 
 | Método da biblioteca | Recurso IXC | Descrição
 | :---------- | :--------- | :---------- |
-| ativaContrato({ id_contrato }) | cliente_contrato_ativar_cliente | Ativa um contrato que esteja com o status de `pré-contrato` |
-| desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente que já tenha sido desbloqueado |
-| getArquivoBoleto({ id_fatura }) | get_boleto | Obtém uma string base64 com o conteúdo do PDF da fatura de um cliente |
+| ativaContrato({ id_contrato }) | cliente_contrato_ativar_cliente | Ativa um contrato no IXC Provedor |
+| desbloqueioDeConfianca({ id_contrato }) | desbloqueio_confianca | Solicita liberação de um cliente bloqueado |
+| getArquivoBoleto({ id_fatura }) | get_boleto | Obtém um base64 do PDF da fatura de um cliente |
 | limparMAC({ id_login }) | radusuarios_25452 | Remove o endereço de MAC do login de um cliente |
-| liberacaoTemporaria({ id_contrato }) | cliente_contrato_btn_lib_temp_24722 | Desbloqueia, por 72 horas, o contrato de um cliente bloqueado |
+| liberacaoTemporaria({ id_contrato }) | cliente_contrato_btn_lib_temp_24722 | Desbloqueia um contrato por 72h |
 
 
 # Contribuições
 
 Contribuições são sempre bem-vindas!\
 Se você conhece uma maneira melhor de fazer algo, por favor, me avise!\
-Ou sinta-se a vontade para criar um novo PR!
+Ou sinta-se a vontade para enviar um novo PR!
 
 At.te,\
 <b>Felipe S. Carmo</b>.

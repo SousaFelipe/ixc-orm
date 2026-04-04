@@ -3,7 +3,7 @@ import { IxcOrm } from '../../src/index';
 
 class Cliente extends IxcOrm {
   private constructor() {
-    super('cliente')
+    super('cliente');
   }
   static newCliente() {
     return new Cliente();
@@ -12,6 +12,7 @@ class Cliente extends IxcOrm {
 
 
 describe('IxcResponse', () => {
+  const cnpj_cpf = process.env.TEST_VALID_CPF || '123.456.789-10';
 
 
   it('deve retornar uma mensagem de erro', async () => {
@@ -21,7 +22,7 @@ describe('IxcResponse', () => {
         .GET();
 
     expect(response.fail()).toBeTruthy();
-    expect(response.message()).toBe('Ocorreu um erro ao processar. Contate o suporte IXC Soft.')
+    expect(response.message()).toBe('Ocorreu um erro ao processar. Contate o suporte IXC Soft.');
 
   });
 
@@ -29,11 +30,11 @@ describe('IxcResponse', () => {
   it('não deve retornar uma mensagem de erro', async () => {
     const response = await Cliente.newCliente()
         .where('cnpj_cpf')
-        .exactly('025.076.083-58') // Inserir CPF de um cliente cadastrado no IXC Provedor.
+        .exactly(cnpj_cpf)
         .GET();
 
     expect(response.fail()).toBeFalsy();
-    expect(response.message().length).toBeLessThan(1)
+    expect(response.message().length).toBeLessThan(1);
   });
 
 });
