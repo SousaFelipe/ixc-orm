@@ -18,41 +18,50 @@ export default class Environment {
     return Environment.instance;
   }
 
-
   private constructor() {
-    this.shouldToLoadDotEnvFile();
+    this.loadEnvFromEnvFile();
     this.setToken(process.env.IXC_ACCESS_TOKEN);
     this.setDomain(process.env.IXC_SERVER_DOMAIN);
   }
 
+  /**
+   * Obtém o token definido na variável **IXC_ACCESS_TOKEN** no arquivo **.env**.
+   * @returns O token de autenticação da API do IXC Provedor.
+   */
+  getToken(): string {
+    return this.token;
+  }
 
-  private shouldToLoadDotEnvFile(): void {
+  /**
+   * Obtém o domínio definido na variável **IXC_SERVER_DOMAIN** no arquivo **.env**.
+   * @returns O domínio do servidor IXC Provedor.
+   */
+  getDomain(): string {
+    return this.domain;
+  }
+
+  private loadEnvFromEnvFile(): void {
     if (this.envHasBeenLoaded()) {
       return;
     }
-    this.loadEnvFromEnvFile();
-  }
 
-
-  private envHasBeenLoaded(): boolean {
-    const allEnvVars = Object.keys(process.env);
-    return allEnvVars.some(envVar => envVar.startsWith('IXC_'));
-  }
-
-
-  private loadEnvFromEnvFile(): void {
     const fileUtil = new Utils.File();
     const envfile = fileUtil.findFile('.env');
     const env = dotenv.config({
       quiet: true,
       path: path.resolve(envfile)
     });
+    
     if (env.error) {
       console.error(env.error);
       process.exit(1);
     }
   }
 
+  private envHasBeenLoaded(): boolean {
+    const allEnvVars = Object.keys(process.env);
+    return allEnvVars.some(envVar => envVar.startsWith('IXC_'));
+  }
 
   private setDomain(domain?: string): void {
     const newDomainIsValid = !(!domain?.length);
@@ -62,22 +71,11 @@ export default class Environment {
     }
   }
 
-
   private setToken(token?: string): void {
     const newTokenIsValid = !(!token?.length);
     const oldTokenisValid = !this.token?.length;
     if (newTokenIsValid && oldTokenisValid) {
       this.token = token;
     }
-  }
-
-
-  getDomain(): string {
-    return this.domain;
-  }
-
-
-  getToken(): string {
-    return this.token;
   }
 }
