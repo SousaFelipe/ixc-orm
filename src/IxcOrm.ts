@@ -43,7 +43,7 @@ export default abstract class IxcOrm extends RequestEmitter {
    * Inicia um novo objeto de parâmetro de busca do filtro da grid.
    * 
    * @param column O nome da coluna onde o filtro de busca será executado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   where(column: string): IxcOrm {
     this.parameterStub.withType(column);
@@ -52,10 +52,10 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**L**) = LIKE.
+   * **L** (LIKE).
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   like(value: string | number): IxcOrm {
     this.parameterStub
@@ -68,10 +68,10 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**=**) = EQUALS.
+   * **=** (EQUALS).
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   exactly(value: string | number): IxcOrm {
     this.parameterStub
@@ -84,10 +84,26 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**<**) = LESS_THAN.
+   * **!=** (NOT).
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
+   */
+  not(value: string | number): IxcOrm {
+    this.parameterStub
+      .withOperator(Operators.NOT)
+      .withValue(value);
+    this.addParamToGridAndResetStub();
+    super.setupQuery(this.createQueryObject());
+    return this;
+  }
+
+  /**
+   * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
+   * **<** (LESS_THAN).
+   * 
+   * @param value O valor a ser filtrado.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   lessThan(value: string | number): IxcOrm {
     this.parameterStub
@@ -100,10 +116,10 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**<=**) = LESS_THAN_EQUALS.
+   * **<=** (LESS_THAN_EQUALS).
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   lessThanEquals(value: string | number): IxcOrm {
     this.parameterStub
@@ -116,10 +132,10 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**>**) = GREATER_THAN.
+   * **>** (GREATER_THAN).
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   greaterThan(value: string | number): IxcOrm {
     this.parameterStub
@@ -132,10 +148,10 @@ export default abstract class IxcOrm extends RequestEmitter {
 
   /**
    * Adiciona, ao último objeto de parâmetro iniciado, um valor a ser filtrado com o operador
-   * (**>=**) = GREATER_THAN_EQUALS.
+   * **>=** GREATER_THAN_EQUALS.
    * 
    * @param value O valor a ser filtrado.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   greaterThanEquals(value: string | number): IxcOrm {
     this.parameterStub
@@ -151,7 +167,7 @@ export default abstract class IxcOrm extends RequestEmitter {
    * 
    * @param page A página a ser buscada.
    * @param rows A quantidade de registros por página.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   paginate(page: number, rows: number): IxcOrm {
     this.pagination = new Pagination(page, rows);
@@ -163,7 +179,7 @@ export default abstract class IxcOrm extends RequestEmitter {
    * 
    * @param sort **ASC** ou **DESC**.
    * @param column A coluna que será utilizada para ordenar os registros.
-   * @returns A própria instância.
+   * @returns A própria instância de {@link IxcOrm}.
    */
   orderBy(column: string, sort: Sort): IxcOrm {
     this.ordering = (sort === Sort.ASC)
