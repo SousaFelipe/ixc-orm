@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SousaFelipe/ixc-orm.git"
+    "url": "git+https://github.com/fscarmo/ixc-orm.git"
   },
   "keywords": [
     "IXCSoft API",
@@ -27,7 +27,7 @@
     "url": "https://www.fscarmo.dev.br/"
   },
   "bugs": {
-    "url": "https://github.com/SousaFelipe/ixc-orm/issues"
+    "url": "https://github.com/fscarmo/ixc-orm/issues"
   },
   "dependencies": {
     "dotenv": "^17.2.3"
